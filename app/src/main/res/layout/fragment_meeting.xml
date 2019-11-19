@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/item_circle_color_meeting"
+        android:layout_width="@dimen/circle_color_size"
+        android:layout_height="@dimen/circle_color_size"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:srcCompat="@drawable/circle_meeting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="couleur de la réunion" />
+
+    <TextView
+        android:id="@+id/item_list_name_room"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/item_list_mail_participant"
+        app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/item_circle_color_meeting"
+        app:layout_constraintTop_toTopOf="@+id/item_circle_color_meeting"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/item_list_mail_participant"
+        android:layout_width="0dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="#000000"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
+        app:layout_constraintBottom_toBottomOf="@+id/item_circle_color_meeting"
+        app:layout_constraintStart_toEndOf="@+id/item_circle_color_meeting"
+         />
+
+    <ImageButton
+        android:id="@+id/item_list_delete_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="0dp"
+        android:background="@null"
+        android:contentDescription="bouton poubelle"
+        app:layout_constraintBottom_toBottomOf="@+id/item_list_mail_participant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_name_room"
+        app:srcCompat="@drawable/ic_delete" />
+
+    <TextView
+        android:id="@+id/item_list_letter_Room"
+        android:layout_width="@dimen/circle_color_size"
+        android:layout_height="@dimen/circle_color_size"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:text="A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

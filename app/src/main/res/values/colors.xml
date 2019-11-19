@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#279DE4</color>
+    <color name="colorPrimaryDark">#0062B6</color>
+    <color name="colorAccent">#D81B1B</color>
+    <color name="colorDelete">#363636</color>
+    <color name="roomA">#fed1c8</color>
+    <color name="roomB">#b4cf87</color>
+    <color name="roomC">#87c0cf</color>
+    <color name="roomD">#7f84cb</color>
+    <color name="roomE">#be7fcb</color>
+    <color name="roomF">#cb7f94</color>
+    <color name="roomG">#f3ef74</color>
+    <color name="roomH">#eda44c</color>
+    <color name="roomI">#b4ebe8</color>
+    <color name="roomJ">#c5c5c5</color>
+</resources>

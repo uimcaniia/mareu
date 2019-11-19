@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/containerRecap"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/validMeetingView"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="25dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/theme_meeting"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/background_subject2"
+                    android:padding="10dp"
+                    android:text="Thème de la réunion"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageCalendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:tint="#4895DA"
+                    app:srcCompat="@drawable/ic_event_note_24px"
+                    tools:srcCompat="@drawable/ic_event_note_24px" />
+                <TextView
+                    android:id="@+id/dateMeeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="DATE :"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginBottom="25dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:tint="#4895DA"
+                    app:srcCompat="@drawable/ic_access_time_24px"
+                    tools:srcCompat="@drawable/ic_access_time_24px" />
+                <TextView
+                    android:id="@+id/hourMeeting"
+                    android:inputType="number"
+                    android:text="HORAIRE :"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="18sp" />
+                </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="SALLE DISPONIBLE :"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="35dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/background_spinner"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+
+                <Spinner
+                    android:id="@+id/spinnerRoom"
+                    android:theme="@style/AppTheme.NoTitleBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="PARTICIPANTS :"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent"
+                android:paddingTop="0dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:padding="10dp"
+
+                    android:id="@+id/listParticipantAdded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textColor="#4895DA"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="66dp"
+                android:padding="20dp">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/valid_meeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:clickable="true"
+                    android:tint="#FFFFFF"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_done_24px"
+                    tools:srcCompat="@drawable/ic_done_24px" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_back"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="#FFFFFF"
+                    android:background="@drawable/ic_clear_24px"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_clear_24px" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:tint="#4895DA"
+        app:srcCompat="@drawable/ic_create_24px"/>
+
+
+    </RelativeLayout>
+</ScrollView>

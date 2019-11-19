@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- checked -->
+    <!-- unchecked -->
+    <!--on focus-->
+    <!-- default -->
+    <item android:state_checked="true" android:drawable="@drawable/ic_how_to_reg_24px" />
+    <item android:state_checked="false" android:drawable="@drawable/ic_person_outline_24px" />
+    <item android:state_focused="true" android:drawable="@android:drawable/checkbox_off_background" />
+    <item android:drawable="@android:drawable/checkbox_off_background" />
+</selector>
