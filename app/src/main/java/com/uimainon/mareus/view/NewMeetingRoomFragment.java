@@ -160,7 +160,8 @@ public class NewMeetingRoomFragment extends Fragment{
                     mLastSpinnerPosition = i; // on fait pointer le spinner sur l'item de la réunion concernée
                 }
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.spinner_style, mStringRooms); // mise en place des item du spinner
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, mStringRooms); // mise en place des item du spinner
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             mSpinner.setAdapter(adapter); // envoie à l'adapter du spinner
             mSpinner.setSelection(mLastSpinnerPosition); // position par défault du pointeur du spinner en fonction de la ROOM déjà enregistré dan la réunion concernée
             mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
