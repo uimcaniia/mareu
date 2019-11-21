@@ -19,7 +19,7 @@ public interface MeetingApiService {
     /** Ajoute une réunion */
     void addMeetingToList(Meeting meeting);
 
-    List<Participant> getListParticipantForThisDate(String date, int hour, int minute, Meeting meeting);
+    List<Participant> getListParticipantForThisDate(String date, int hour, int minute);
 
     List<Room> getListRoomForThisDate(String date, int hour, int minute);
 

@@ -1,13 +1,18 @@
 package com.uimainon.mareus.controlleur;
 
+import android.widget.Toast;
+
 import com.uimainon.mareus.model.Meeting;
 import com.uimainon.mareus.model.Participant;
+import com.uimainon.mareus.model.ParticipantsList;
 import com.uimainon.mareus.model.Room;
 import com.uimainon.mareus.service.DateService;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class MeetingService {
@@ -16,6 +21,7 @@ public class MeetingService {
     private DateService mDateService = new DateService();
     private int hourStartDay = mDateService.giveHourStartDay();
     private int hourEndDay = mDateService.giveHourEndDay();
+    private Meeting mNewMeeting;
 
     public MeetingService(MeetingApiService apiService) {
         this.apiService = apiService;
@@ -48,8 +54,8 @@ public class MeetingService {
      * TRouve la liste des participants disponible à la date et aux horaires souhaités
      * on retire ceux déjà en réunion avant et après - de 70 min avant et après l'heure voulue
      */
-    public List<Participant> getListParticipantForThisDate(String date, int hour, int minute, Meeting meeting){
-        return apiService.getListParticipantForThisDate(date, hour, minute, meeting);
+    public List<Participant> getListParticipantForThisDate(String date, int hour, int minute){
+        return apiService.getListParticipantForThisDate(date, hour, minute);
     }
 
     /**
@@ -218,4 +224,67 @@ public class MeetingService {
         }
         return listGoodOrder;
     }
+
+
+    /**
+     * retourne le prochain Id pour la futur nouvelle réunion
+     * @return
+     */
+    public int searchNextIdForNewMeeting(){
+        int sizeOfAllMeeting = AllMeetings().size();
+        List<Meeting>mListAllMeeting = AllMeetings();
+        int idMeeting = 0;
+        if(mListAllMeeting.size() != 0){ // si des réunion existe déjà, vu qu'en cas de suppression, des ID peuvent disparaitre et faire un trou dans la chaîne, on récupe la dernière réunion, et on utilise son ID +1
+            idMeeting =  mListAllMeeting.get(sizeOfAllMeeting-1).getIdMeeting()+1;
+        }
+        return idMeeting;
+    }
+
+
+
+
+    /** prend par défault la date d'aujourd'hui et l'heure courante.
+     * vérifie si dans ce crénaux, une salle de réunion est disponible.
+     *      => si rien de dispo, avance l'heure de 1h jusqu'à la fin de la journée
+     *      => si toujours rien de dispo, cherche au jour d'après la prochaine dispo  (sur max 365 jours)
+     * return un Meeting avec une Room instancié ou qui vaut null
+     */
+    public Meeting searchOtherDateAndTimeForNewMeeting(String sDateToday, Date today, int goodHourInFrance, int idMeeting){
+        int mMinute = 0; // on remet les minutes à zéro
+        int resultHour = searchIfRoomDispoForOtherTime(sDateToday, goodHourInFrance, mMinute); // retourne une heure dispo (0 si rien dans la journée dans aucune room)
+        List<Room> mRooms = getListRoomForThisDate(sDateToday, goodHourInFrance, mMinute);
+
+        if(resultHour != 0){ // si une room au moins est disponible avec ce nouvel horaire
+            mRooms = getListRoomForThisDate(sDateToday, resultHour, mMinute);
+            mNewMeeting = new Meeting(idMeeting, sDateToday, resultHour, mMinute, "Aucun sujet", new ParticipantsList(), mRooms.get(0));
+        }
+        if(resultHour == 0){ // si aucune heure de dispo dans aucune salle dans la même journée, alors on change de jour (+1)
+            Calendar oneDayAfter;
+            for (int i = 1 ; i < 365 ; i++){ //on boucle sur 1 an au max
+                oneDayAfter = mDateService.addCalendarToDate(today, i); // Nouveau calendrier, on avance d'un jour
+                sDateToday = mDateService.getStringDate(oneDayAfter);
+                goodHourInFrance = mDateService.giveHourStartDay(); // on remet l'heure de début d'une journée (définit dans la classe DateService)
+                mRooms = getListRoomForThisDate(sDateToday, mDateService.giveHourStartDay(), mMinute);
+                if(mRooms.size()!=0){ // si dans cette nouvelle journée, une salle est au moins dispo, on stoppe la boucle
+                    break;
+                }else{ // sinon on cherche sur un autre crénaux horaire de cette nouvelle journée
+                    resultHour = searchIfRoomDispoForOtherTime(sDateToday, 0, mMinute); // on remet l'heure à zéro pour repartir sur l'heure de départ d'une journée
+                    if(resultHour != 0){ // si dans ce nouveau crénau horaire de cette nouvelle journée, une salle est au moins dispo, on stoppe la boucle
+                        goodHourInFrance = resultHour;
+                        mRooms = getListRoomForThisDate(sDateToday, goodHourInFrance, mMinute);
+                        break;
+                    }
+                }
+            }
+            if(mRooms.size()==0) { // si malgré tout Il n'y a pas de place
+                mNewMeeting = new Meeting(idMeeting, sDateToday, goodHourInFrance, mMinute, "Aucun sujet", new ParticipantsList(), null);
+
+            }else {
+                Room mRoom = mRooms.get(0);
+                mNewMeeting = new Meeting(idMeeting, sDateToday, goodHourInFrance, mMinute, "Aucun sujet", new ParticipantsList(), mRoom);
+            }
+        }
+        return mNewMeeting;
+    }
+
 }

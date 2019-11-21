@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#279DE4</color>
+    <color name="colorPrimaryFade">#4895DA</color>
     <color name="colorPrimaryDark">#0062B6</color>
     <color name="colorAccent">#D81B1B</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorFont">#000000</color>
     <color name="colorDelete">#363636</color>
     <color name="roomA">#fed1c8</color>
     <color name="roomB">#b4cf87</color>

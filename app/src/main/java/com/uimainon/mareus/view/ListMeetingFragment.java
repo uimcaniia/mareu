@@ -174,23 +174,13 @@ public class ListMeetingFragment extends Fragment {
                 Context context = getContext();
                 Intent intent = new Intent ( context , AddMeetingActivity.class );
 
-                int sizeOfAllMeeting = mMeetingService.AllMeetings().size();
-                List<Meeting>mListAllMeeting = mMeetingService.AllMeetings();
-                int idMeeting = 0;
-                if(mListAllMeeting.size() != 0){ // si des réunion existe déjà, vu qu'en cas de suppression, des ID peuvent disparaitre et faire un trou dans la chaîne, on récupe la dernière réunion, et on utilise son ID +1
-                    idMeeting =  mListAllMeeting.get(sizeOfAllMeeting-1).getIdMeeting()+1;
-                }
-
-                int mYear = mDate.giveYear();
-                int mMonth = mDate.giveMonth();
-                int mDay = mDate.giveDay();
-                int mHour = mDate.giveHour();
+                int idMeeting = mMeetingService.searchNextIdForNewMeeting();
                 int mMinute = mDate.giveMinute()+5;//(petite marge pour le temps de création et enregistrement')
 
-                Date today = mDate.formatDateToCompare(mYear, mMonth, mDay);
+                Date today = mDate.formatDateToCompare(mDate.giveYear(), mDate.giveMonth(), mDate.giveDay());
                 int goodHourInFrance = 0;
                 try { //donne la bonne heure en France (heure d'été et hivers
-                    goodHourInFrance = mDate.giveTheGoodHourInFrance(mYear ,mHour, today);
+                    goodHourInFrance = mDate.giveTheGoodHourInFrance(mDate.giveYear() ,mDate.giveHour() , today);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -199,43 +189,13 @@ public class ListMeetingFragment extends Fragment {
                 List<Room> mRooms = mMeetingService.getListRoomForThisDate(sDateToday, goodHourInFrance, mMinute);
 
                 if(mRooms.size()==0) { // si aucune Room de dispo, on cherche le prochaine horaire
-                    mMinute = 0; // on remet les minutes à zéro
-                    int resultHour = mMeetingService.searchIfRoomDispoForOtherTime(sDateToday, goodHourInFrance, mMinute); // retourne une heure dispo (0 si rien dans la journée dans aucune room)
-                    if(resultHour != 0){ // si une room au moins est disponible avec ce nouvel horaire
-                        mRooms = mMeetingService.getListRoomForThisDate(sDateToday, resultHour, mMinute);
-                        mNewMeeting = new Meeting(idMeeting, sDateToday, resultHour, mMinute, "Aucun sujet", new ParticipantsList(), mRooms.get(0));
-                    }
-                    if(resultHour == 0){ // si aucune heure de dispo dans aucune salle dans la même journée, alors on change de jour (+1)
-                        Calendar oneDayAfter;
-                        for (int i = 1 ; i < 365 ; i++){ //on boucle sur 1 an au max
-                            oneDayAfter = mDate.addCalendarToDate(today, i); // Nouveau calendrier, on avance d'un jour
-                            sDateToday = mDate.getStringDate(oneDayAfter);
-                            goodHourInFrance = mDate.giveHourStartDay(); // on remet l'heure de début d'une journée (définit dans la classe DateService)
-                            mRooms = mMeetingService.getListRoomForThisDate(sDateToday, mDate.giveHourStartDay(), mMinute);
-                            if(mRooms.size()!=0){ // si dans cette nouvelle journée, une salle est au moins dispo, on stoppe la boucle
-                                break;
-                            }else{ // sinon on cherche sur un autre crénaux horaire de cette nouvelle journée
-                                resultHour = mMeetingService.searchIfRoomDispoForOtherTime(sDateToday, 0, mMinute); // on remet l'heure à zéro pour repartir sur l'heure de départ d'une journée
-                                if(resultHour != 0){ // si dans ce nouveau crénau horaire de cette nouvelle journée, une salle est au moins dispo, on stoppe la boucle
-                                    goodHourInFrance = resultHour;
-                                    mRooms = mMeetingService.getListRoomForThisDate(sDateToday, goodHourInFrance, mMinute);
-                                    break;
-                                }
-                            }
-                        }
-                        if(mRooms.size()==0) { // si malgré tout Il n'y a pas de place
-                            System.out.println("ici 1 => ");
-                            Toast.makeText(getContext(), "Aucune salle n'est dispo. Aucune réunion ne peut etre crée. Agrandissez les locaux!", Toast.LENGTH_SHORT).show();
-                        }else {
-                            mRoom = mRooms.get(0);
-                            System.out.println("1 => room enregistré => "+mRoom.getName());
-                            mNewMeeting = new Meeting(idMeeting, sDateToday, goodHourInFrance, mMinute, "Aucun sujet", new ParticipantsList(), mRoom);
-                        }
+                    mNewMeeting =  mMeetingService.searchOtherDateAndTimeForNewMeeting(sDateToday, today, goodHourInFrance, idMeeting);
+                    if(mNewMeeting.getRoom() == null){
+                        Toast.makeText(getContext(), "Aucune salle n'est dispo. Aucune réunion ne peut etre crée. Agrandissez les locaux!", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     mRoom = mRooms.get(0);
                     mNewMeeting = new Meeting(idMeeting, sDateToday, goodHourInFrance, mMinute, "Aucun sujet", new ParticipantsList(), mRoom);
-
                 }
                 assert context != null;
                 intent.putExtra("receiveMeeting", mNewMeeting);
@@ -243,6 +203,8 @@ public class ListMeetingFragment extends Fragment {
             }
         });
     }
+
+
 
     @Override
     public void onStart() {

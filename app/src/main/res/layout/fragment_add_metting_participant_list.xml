@@ -14,9 +14,9 @@
         android:name="com.uimainon.mareus.view.NewMeetingParticipantFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginLeft="@dimen/recyclerview_list_participant_margin"
+        android:layout_marginRight="@dimen/recyclerview_list_participant_margin"
+        android:layout_marginBottom="@dimen/recyclerview_list_participant_margin_bottom"
         app:layoutManager="LinearLayoutManager"
         tools:context=".view.NewMeetingParticipantFragment"
         tools:listitem="@layout/fragment_add_meeting_participant" />

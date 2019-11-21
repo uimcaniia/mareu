@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/listDateHour"
         android:orientation="vertical"
         android:layout_width="match_parent">

@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".rooteur.ListMeetingActivity">
 
-<!--    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
-
     <FrameLayout
         android:id="@+id/container"
         app:layout_constraintTop_toTopOf="parent"

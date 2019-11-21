@@ -141,20 +141,6 @@ public class Add_Meeting_ActivityTest {
         onView(withId(R.id.containerRecap)).check(matches(not(isDisplayed())));
         onView(withId(R.id.textNoParticpantDispo)).check(matches(isDisplayed()));
     }
-
-    /**
-     * Show the good view if there are no more Room
-     * (when every Room are always in meeting)
-     */
-/*    @Test
-    public void showTheGoodViewInSpinnerRoom() {
-        deleteItemRecyclerView(mListMeeting);
-        mListMeeting.clear();
-        addMeetingWithEveryRoomForTest(mAllRoom);
-        onView(withId(R.id.fab_add_new_metting)).perform(click());
-        onView(allOf(withText("Ma réu"), isDescendantOfA(withId(R.id.tabs)))).perform(click());
-        onView(withId(R.id.spinnerRoom)).check(matches(withSpinnerText(containsString("Aucune salle de disponible"))));
-    }*/
 }
 
 

@@ -1,10 +1,26 @@
 <resources>
-   // <string name="app_name">Ma réu</string>//
+    <string name="app_name">Ma réu</string>
+
     <string name="action_settings">Filtrer par dates</string>
     <string name="action_settings2">Filtrer par lieu</string>
+
     <string name="newMeetTab2">Date</string>
     <string name="newMeetTab1">Ma réu</string>
-    <string name="nothingMeeting">Il n\'y a aucune réunion de prévus</string>
     <string name="newMeetTab3">Participants</string>
+
+    <string name="nothingMeeting">Il n\'y a aucune réunion de prévus</string>
+
     <string name="nothingParticipant">Tous les participants sont déjà en réunion à la date et à l\'heure sélectionnées</string>
+
+    <string name="bouton_poubelle">bouton poubelle</string>
+    <string name="letterRoom">A</string>
+    <string name="meetingColorCircle">couleur de la réunion</string>
+    <string name="participants">PARTICIPANTS :</string>
+    <string name="salle_disponible">SALLE DISPONIBLE :</string>
+    <string name="horaire">HORAIRE :</string>
+    <string name="date">DATE :</string>
+
+    <string name="th_me_de_la_r_union">Thème de la réunion</string>
+    <string name="mail_du_participant">mail du participant</string>
+    <string name="case_a_cocher_pour_ajouter_la_liste_des_participants">case a cocher pour ajouter à la liste des participants</string>
 </resources>

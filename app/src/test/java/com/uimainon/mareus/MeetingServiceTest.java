@@ -6,7 +6,6 @@ import com.uimainon.mareus.model.Meeting;
 import com.uimainon.mareus.model.Participant;
 import com.uimainon.mareus.model.ParticipantsList;
 import com.uimainon.mareus.model.Room;
-import com.uimainon.mareus.service.DateService;
 import com.uimainon.mareus.service.MeetingListGenerator;
 import com.uimainon.mareus.service.ParticipantListGenerator;
 import com.uimainon.mareus.service.RoomListGenerator;
@@ -18,11 +17,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,6 +24,7 @@ import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInA
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
 @RunWith(JUnit4.class)
@@ -94,5 +89,40 @@ public class MeetingServiceTest {
         Assert.assertEquals(mListMeetingAlreadyFilterByRoom, newListFilter);
     }
 
+    /**renvoie la liste des Room disponible (qui ne sont pas déjà utilisé pendant une réunion
+     * En selectionnant celles a la meme date et heure que la réunion ajouté*/
+    @Test
+    public void makeListRoomDispoForThisDate() throws ParseException {
+        mMeetingService.AllMeetings().clear();
+        List<Room> mListRoom = mMeetingService.getListRoomForThisDate(mNewMeeting.getDate(), mNewMeeting.getHour(), mNewMeeting.getMinute());
+        Room roomNotDispo = mListRoom.get(0);
+        Room roomDispo = mListRoom.get(1);
+
+        Meeting mNewMeetingToTestRoom = new Meeting(0, "2019-11-14", 14, 10, "Aucun sujet", mListParticipant, roomNotDispo);
+        mMeetingService.addMeetingToList(mNewMeetingToTestRoom);
+        List<Room> mListRoomReste = mMeetingService.getListRoomForThisDate(mNewMeetingToTestRoom.getDate(), mNewMeetingToTestRoom.getHour(), mNewMeetingToTestRoom.getMinute());
+
+        assertFalse(mListRoomReste.contains(roomNotDispo));
+        assertTrue(mListRoomReste.contains(roomDispo));
+        assertEquals(mListRoom.size(), mListRoomReste.size(), 1);
+    }
+
+    /**renvoie la liste des Participant disponible (qui ne sont pas déjà utilisé pendant une réunion
+     * En selectionnant ceux a la meme date et heure que la réunion ajouté*/
+    @Test
+    public void makeListParticipantDispoForThisDate() throws ParseException {
+        mMeetingService.AllMeetings().clear();
+        List<Participant> mListParticipantDispo = mMeetingService.getListParticipantForThisDate(mNewMeeting.getDate(), mNewMeeting.getHour(), mNewMeeting.getMinute());
+        Participant mPartNotDispo = mListParticipantDispo.get(0);
+        Participant mPartDispo = mListParticipantDispo.get(1);
+
+        Meeting mNewMeetingToTestParticipant = new Meeting(0, "2019-11-14", 14, 10, "Aucun sujet", mListParticipant, mRoom);
+        mNewMeetingToTestParticipant.getParticipants().add(mPartNotDispo);
+        mMeetingService.addMeetingToList(mNewMeetingToTestParticipant);
+
+        List<Participant> mListParticipantDispoReste = mMeetingService.getListParticipantForThisDate(mNewMeetingToTestParticipant.getDate(), mNewMeetingToTestParticipant.getHour(), mNewMeetingToTestParticipant.getMinute());
+        assertFalse(mListParticipantDispoReste.contains(mPartNotDispo));
+        assertTrue(mListParticipantDispoReste.contains(mPartDispo));
+    }
 
 }

@@ -51,7 +51,7 @@ public class NewMeetingParticipantFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Meeting mMeeting = this.getArguments().getParcelable("meeting");
-        List<Participant> mParticipants = mMeetingService.getListParticipantForThisDate(mMeeting.getDate(), mMeeting.getHour(), mMeeting.getMinute(), mMeeting);
+        List<Participant> mParticipants = mMeetingService.getListParticipantForThisDate(mMeeting.getDate(), mMeeting.getHour(), mMeeting.getMinute());
         List<Participant>mParticipantsOfMeeting = mMeeting.getParticipants();
         List<Meeting> meetingList = mMeetingService.AllMeetings();
 

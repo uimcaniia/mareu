@@ -13,8 +13,8 @@
         android:id="@+id/list_meeting"
         android:name="com.uimainon.mareus.view.ListMeetingFragment"
         android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/recycler_meeting_list_margin"
+        android:layout_marginRight="@dimen/recycler_meeting_list_margin"
         android:visibility="visible"
         android:layout_height="match_parent" />
 
@@ -35,8 +35,8 @@
         android:clickable="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="@dimen/margin_end_add_btn"
+        android:layout_marginBottom="@dimen/margin_bottom_add_btn"
         tools:srcCompat="@drawable/ic_add_24px"
         app:srcCompat="@drawable/ic_add_24px" />
 

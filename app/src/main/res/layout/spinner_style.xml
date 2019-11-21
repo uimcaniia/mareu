@@ -5,7 +5,6 @@
     android:layout_height="fill_parent"
     android:textSize="18sp"
     android:gravity="center"
-
     android:textColor="@color/colorDelete">
 
 </TextView>

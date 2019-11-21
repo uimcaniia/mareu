@@ -1,6 +1,5 @@
 package com.uimainon.mareus;
 
-import com.uimainon.mareus.di.DI;
 import com.uimainon.mareus.model.Meeting;
 import com.uimainon.mareus.model.ParticipantsList;
 import com.uimainon.mareus.model.Room;
@@ -86,10 +85,4 @@ public class DateServiceTest {
         assertEquals(0, sameHour);
     }
 
-    /**renvoie true ou false. vérifie si l'heure est déjà passée*/
-    @Test
-    public void verifIfTimeIsPossibleWithSuccess() {
-
-        // mDate.verifIfTimeIsPossible(Meeting mMeeting);
-    }
 }

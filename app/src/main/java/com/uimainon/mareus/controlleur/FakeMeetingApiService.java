@@ -50,9 +50,9 @@ public class FakeMeetingApiService implements MeetingApiService {
      * @return
      */
     @Override
-    public List<Participant> getListParticipantForThisDate(String date, int hour, int minute, Meeting meeting){
+    public List<Participant> getListParticipantForThisDate(String date, int hour, int minute){
         mListAllMeetings = AllMeetings();
-        return participantService.getListParticipantForThisDate(mListAllMeetings, date, hour, minute, meeting);
+        return participantService.getListParticipantForThisDate(mListAllMeetings, date, hour, minute);
     }
 
     /**

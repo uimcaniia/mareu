@@ -39,7 +39,6 @@ public class NewMeetingDateHourFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View drawer = inflater.inflate(R.layout.fragment_add_meeting_date_hour, container, false);
         Meeting mMeeting = this.getArguments().getParcelable("meeting");
-        System.out.println("Refresh fragment 1");
         String date = mMeeting.getDate();
         String[] splitArray = date.split("-");
 

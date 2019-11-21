@@ -30,7 +30,7 @@ public class ParticipantListApiService {
      * @param minute
      */
 
-    public List<Participant> getListParticipantForThisDate(List<Meeting> mListAllMeetingsCreate, String date, int hour, int minute, Meeting meetingToModif){
+    public List<Participant> getListParticipantForThisDate(List<Meeting> mListAllMeetingsCreate, String date, int hour, int minute){
         Set<Participant> mListParticipantNotDispo = new ArraySet<>(); //=> contiendra les participant disponible
         List<Participant> mListOfAllParticipants = getListAllParticipant(); // => contient tous les participants de la boite
         List<Participant> mListParticipantDispo = new ArrayList<>(mListOfAllParticipants); /// contiendra les participants déjà en réunion
