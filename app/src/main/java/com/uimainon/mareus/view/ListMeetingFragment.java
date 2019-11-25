@@ -1,5 +1,6 @@
 package com.uimainon.mareus.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,12 +34,12 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class ListMeetingFragment extends Fragment {
 
+    private static final int RESULT_OK = 1;
     private List<Meeting> mMeetings;
     private RecyclerView mRecyclerView;
     private TextView mTextViewNothing;
@@ -47,6 +48,10 @@ public class ListMeetingFragment extends Fragment {
     private List<Participant> mParticipant;
     private Room mRoom;
     private DateService mDate;
+    private DialogFragmentDateAndRoom mDialogFragmentRoom;
+    public static final int RESULT_ROOM = 1; //
+    public static final int RESULT_DATE = 2;
+
 
 
     public static ListMeetingFragment newInstance() {
@@ -106,16 +111,70 @@ public class ListMeetingFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        mMeetings = mMeetingService.AllMeetings();
+        mDialogFragmentRoom = new DialogFragmentDateAndRoom();
+        Bundle args = new Bundle();
+        if(mMeetings.size() == 0){
+            args.putBoolean("showDateRoom", false);
+        }else{
+            args.putBoolean("showDateRoom", true);
+        }
         switch (id) {
             case R.id.action_filter_date:
+                args.putBoolean("showRoom", false);
+                mDialogFragmentRoom.setArguments(args);
+                mDialogFragmentRoom.setTargetFragment(this, RESULT_DATE);
+                assert getFragmentManager() != null;
+                mDialogFragmentRoom.show(getFragmentManager().beginTransaction(), "MyRoomDialog");
                 filterBy("date");
                 return true;
 
             case R.id.action_filter_room:
+                args.putBoolean("showRoom", true);
+                mDialogFragmentRoom.setArguments(args);
+                mDialogFragmentRoom.setTargetFragment(this, RESULT_ROOM);
+                assert getFragmentManager() != null;
+                mDialogFragmentRoom.show(getFragmentManager().beginTransaction(), "MyRoomDialog");
                 filterBy("room");
                 return true;
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("fermeture dialogu" + requestCode);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    //String mLetter = "";
+                    assert this.getArguments() != null;
+                    Room mRoomFilter = this.getArguments().getParcelable("room");
+                   // Bundle bundle = data.getExtras();
+                    //String mMonth = bundle.getString("letter", mLetter);
+                    System.out.println("oui room");
+                    System.out.println("coucou "+mRoomFilter);
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    System.out.println("rien room");
+                }
+
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    //String mLetter = "";
+                    assert this.getArguments() != null;
+                    int mYearFilter = this.getArguments().getInt("YearFilter");
+                    int mMonthFilter = this.getArguments().getInt("MonthFilter");
+                    int mDayFilter = this.getArguments().getInt("DayFilter");
+                    // Bundle bundle = data.getExtras();
+                    //String mMonth = bundle.getString("letter", mLetter);
+                    System.out.println("coucou "+mYearFilter);
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    System.out.println("rien date ");
+                }
+
+                break;
+        }
     }
 
     /**

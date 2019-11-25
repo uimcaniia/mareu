@@ -11,9 +11,15 @@ import java.util.List;
 
 public class FakeMeetingApiService implements MeetingApiService {
 
-    private List<Meeting> mListAllMeetings = MeetingListGenerator.generateArrMeeting();
-    private RoomListApiService rommService = new RoomListApiService();
-    private ParticipantListApiService participantService = new ParticipantListApiService();
+    private final List<Meeting> mListAllMeetings;
+    private final RoomListApiService rommService;
+    private final ParticipantListApiService participantService;
+
+    public FakeMeetingApiService() {
+        mListAllMeetings = MeetingListGenerator.generateArrMeeting();
+         rommService = new RoomListApiService();
+         participantService = new ParticipantListApiService();
+    }
 
 
     /** renvoie la liste des réunions  qui s'affichera dans le recyclerView */
@@ -51,7 +57,7 @@ public class FakeMeetingApiService implements MeetingApiService {
      */
     @Override
     public List<Participant> getListParticipantForThisDate(String date, int hour, int minute){
-        mListAllMeetings = AllMeetings();
+       // mListAllMeetings = AllMeetings();
         return participantService.getListParticipantForThisDate(mListAllMeetings, date, hour, minute);
     }
 
@@ -61,19 +67,19 @@ public class FakeMeetingApiService implements MeetingApiService {
      */
     @Override
     public List<Room> getListRoomForThisDate(String date, int hour, int minute){
-        mListAllMeetings = AllMeetings();
+      //  mListAllMeetings = AllMeetings();
         return rommService.getListRoomDispo(mListAllMeetings, date, hour, minute);
     }
 
     @Override
     public Boolean IsThatPossibleParticipant(Meeting meeting) {
-        mListAllMeetings = AllMeetings();
+       // mListAllMeetings = AllMeetings();
         return participantService.IsThatPossibleParticipant(mListAllMeetings, meeting);
     }
 
     @Override
     public Boolean IsThatPossibleRoom(Meeting meeting) {
-        mListAllMeetings = AllMeetings();
+      //  mListAllMeetings = AllMeetings();
         return rommService.IsThatPossibleRoom(mListAllMeetings, meeting);
     }
 

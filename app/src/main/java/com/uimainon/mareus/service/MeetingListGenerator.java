@@ -13,7 +13,7 @@ public abstract class MeetingListGenerator {
     public static List<Meeting> mListAllMeetings = new ArrayList<Meeting>();
 
     public static List<Meeting> generateArrMeeting(){
-        return mListAllMeetings;
+        return new ArrayList<Meeting>();
     }
     public static List<Meeting> DUMMY_INITIAL_MEETING_NO_FILTER = Arrays.asList(
             new Meeting(2,"17-12-2019", 9, 10, "Aucun sujet", new ParticipantsList(), new Room(2, "Réunion B", "#fed1c8")),

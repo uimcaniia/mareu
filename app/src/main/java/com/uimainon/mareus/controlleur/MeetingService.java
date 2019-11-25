@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MeetingService {
 
-    private final MeetingApiService apiService;
+    private MeetingApiService apiService;
     private DateService mDateService = new DateService();
     private int hourStartDay = mDateService.giveHourStartDay();
     private int hourEndDay = mDateService.giveHourEndDay();
@@ -26,7 +26,9 @@ public class MeetingService {
     public MeetingService(MeetingApiService apiService) {
         this.apiService = apiService;
     }
-
+public void setMeetingService(MeetingApiService apiService){
+        this.apiService = apiService;
+}
     /** renvoie la liste des réunions  qui s'affichera dans le recyclerView */
     public List<Meeting> AllMeetings() {
         return apiService.AllMeetings();
