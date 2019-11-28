@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -33,6 +34,9 @@ public class MeetingServiceTest {
     private MeetingService mMeetingService;
     private ParticipantsList mListParticipant = new ParticipantsList();
     private Room mRoom = new Room(1, "Réunion A", "#fed1c8");
+    private Room mRoomA = mRoom;
+    private Room mRoomB = new Room(1, "Réunion B", "#fed1c8");
+    private Room mRoomC = new Room(1, "Réunion C", "#fed1c8");
     private Meeting mNewMeeting = new Meeting(0, "2019-11-14", 14, 10, "Aucun sujet", mListParticipant, mRoom);
 
 
@@ -63,6 +67,7 @@ public class MeetingServiceTest {
         assertEquals(1, mMeetingService.AllMeetings().size());
         assertEquals(mNewMeeting.getIdMeeting(), mMeetingService.AllMeetings().get(0).getIdMeeting());
     }
+
     /**supprime un meeting de la liste avec succès*/
     @Test
     public void deleteMeetingWithSuccess(){
@@ -72,22 +77,42 @@ public class MeetingServiceTest {
         mMeetingService.deleteMeeting(mListMeeting.get(0));
         assertEquals(0, mMeetingService.AllMeetings().size());
     }
-/*    *//**filtre la liste de Meeting par ROOM*//*
+
+    /**filtre la liste de Meeting par ROOM*/
     @Test
     public void makeGoogOrderRoomListMeetingWithSuccess(){
-        List<Meeting> mListMeetingNoFilter = MeetingListGenerator.DUMMY_INITIAL_MEETING_NO_FILTER;
-        List<Meeting> mListMeetingAlreadyFilterByRoom = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_ROOM;
-        List<Meeting> newListFilter = mMeetingService.makeGoogOrderRoomListMeeting(mListMeetingNoFilter, mRoomSelect);
-        Assert.assertEquals(mListMeetingAlreadyFilterByRoom, newListFilter);
+        List<Meeting> mListMeetingNoFilter = MeetingListGenerator.DUMMY_INITIAL_MEETING_NO_FILTER; //liste meeting complète répartie entre Room A et B
+
+        List<Meeting> mListMeetingAlreadyFilterByRoomA = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_ROOM_A; // liste Meeting dans salle A
+        List<Meeting> mListMeetingAlreadyFilterByRoomB = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_ROOM_B;// liste Meeting dans salle B
+        List<Meeting> mListMeetingAlreadyFilterByRoomC = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_ROOM_C; // liste vide (la salle C n'est pas utilisée dans les meeting de la liste complète)
+
+        List<Meeting> newListFilterA = mMeetingService.makeGoogOrderRoomListMeeting(mListMeetingNoFilter, mRoomA);
+        List<Meeting> newListFilterB = mMeetingService.makeGoogOrderRoomListMeeting(mListMeetingNoFilter, mRoomB);
+        List<Meeting> newListFilterC = mMeetingService.makeGoogOrderRoomListMeeting(mListMeetingNoFilter, mRoomC);
+
+        assertThat(mListMeetingAlreadyFilterByRoomA, containsInAnyOrder(Objects.requireNonNull(newListFilterA.toArray())));
+        assertThat(mListMeetingAlreadyFilterByRoomB, containsInAnyOrder(Objects.requireNonNull(newListFilterB.toArray())));
+        assertThat(mListMeetingAlreadyFilterByRoomC, containsInAnyOrder(Objects.requireNonNull(newListFilterC.toArray())));
     }
-    *//**filtre la liste de Meeting par Date*//*
+
+    /**filtre la liste de Meeting par Date*/
     @Test
     public void makeGoogOrderDateListMeetingWithSuccess() throws ParseException {
         List<Meeting> mListMeetingNoFilter = MeetingListGenerator.DUMMY_INITIAL_MEETING_NO_FILTER;
-        List<Meeting> mListMeetingAlreadyFilterByRoom = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_DATE;
-        List<Meeting> newListFilter = mMeetingService.makeGoogOrderDateListMeeting(mListMeetingNoFilter, yearSelect, monthSelect, daySelect);
-        Assert.assertEquals(mListMeetingAlreadyFilterByRoom, newListFilter);
-    }*/
+
+        List<Meeting> mListMeetingAlreadyFilterByDateA = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_DATE_A; //List meeting a la date 17/12/2019
+        List<Meeting> mListMeetingAlreadyFilterByDateB = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_DATE_B; //List meeting a la date 13/11/2019
+        List<Meeting> mListMeetingAlreadyFilterByDateC = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_DATE_C; // liste vide
+
+        List<Meeting> newListFilterDateA = mMeetingService.makeGoogOrderDateListMeeting(mListMeetingNoFilter, 2019, 12, 17);
+        List<Meeting> newListFilterDateB = mMeetingService.makeGoogOrderDateListMeeting(mListMeetingNoFilter, 2019, 11, 13);
+        List<Meeting> newListFilterDateC = mMeetingService.makeGoogOrderDateListMeeting(mListMeetingNoFilter, 2019, 10, 22);
+
+        assertThat(mListMeetingAlreadyFilterByDateA, containsInAnyOrder(Objects.requireNonNull(newListFilterDateA.toArray())));
+        assertThat(mListMeetingAlreadyFilterByDateB, containsInAnyOrder(Objects.requireNonNull(newListFilterDateB.toArray())));
+        assertThat(mListMeetingAlreadyFilterByDateC, containsInAnyOrder(Objects.requireNonNull(newListFilterDateC.toArray())));
+    }
 
     /**renvoie la liste des Room disponible (qui ne sont pas déjà utilisé pendant une réunion
      * En selectionnant celles a la meme date et heure que la réunion ajouté*/

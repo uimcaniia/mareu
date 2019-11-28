@@ -173,14 +173,12 @@ public class MeetingService {
 
         List<Meeting> listMeeting = new ArrayList<>(mMeetingFilter);
         List<Meeting> listGoodOrder = new ArrayList<>();
-        //List<Room> mRoomList= apiService.getListAllRooms();
 
         int sizeOfMeeting = listMeeting.size();
-       // int sizeOfRoom = mRoomList.size();
 
         for(int i = 0 ; i <sizeOfMeeting ; i++){
             int mLetterRoom = listMeeting.get(i).getRoom().getName().length();
-            String sLetterRoom = listMeeting.get(i).getRoom().getName().substring(mLetterIndex-1);
+            String sLetterRoom = listMeeting.get(i).getRoom().getName().substring(mLetterRoom-1);
             if(sLetterRoom.equals(mLetterFilter)){
                 listGoodOrder.add(listMeeting.get(i));
             }
@@ -203,28 +201,21 @@ public class MeetingService {
         List<Meeting> listMeeting = new ArrayList<>();
         List<Meeting> listGoodOrder = new ArrayList<>();
 
-
         int sizeOfMeetingWhithGoodDate = mMeetingFilter.size(); // on conserve que les meeting à la bonne date
         for (int y = 0; y < sizeOfMeetingWhithGoodDate; y++) {
-            System.out.println(y+" reunion " + mMeetingFilter.get(y).getDate());
             if (mMeetingFilter.get(y).getDate().equals(dateToCompare)) {
-                System.out.println(mMeetingFilter.get(y).getDate() + "date a comparer " + dateToCompare);
                 listMeeting.add(mMeetingFilter.get(y));
             }
         }
-        System.out.println(listMeeting);
         int sizeOfMeeting = listMeeting.size(); // on les réorganise du plus récent au plus ancien
         if (sizeOfMeeting == 0) { // si il n'y a rien, on renvoie la liste vide
-            System.out.println(sizeOfMeeting+" rien " + listGoodOrder);
             return listGoodOrder;
         }
         if (sizeOfMeeting == 1) { // si il n'y a qu'une réunion, on renvoie la liste
             listGoodOrder.add(listMeeting.get(0));
-            System.out.println(sizeOfMeeting+" 1 seule réunion " + listGoodOrder);
             return listGoodOrder;
         }
         if (sizeOfMeeting > 1) {
-            System.out.println(sizeOfMeeting+" 2 au moins " + listGoodOrder);
             listGoodOrder.add(listMeeting.get(0));// on ajoute le premier dans la liste pour commencer la comparaison
             for (int i = 1; i < sizeOfMeeting; i++) {
                 int sizeListGoodOrder = listGoodOrder.size();
@@ -257,7 +248,6 @@ public class MeetingService {
                 }
             }
         }
-        System.out.println("liste good ordre "+listGoodOrder);
         return listGoodOrder;
     }
 
