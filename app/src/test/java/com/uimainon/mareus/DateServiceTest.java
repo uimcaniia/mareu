@@ -85,4 +85,12 @@ public class DateServiceTest {
         assertEquals(0, sameHour);
     }
 
+    /**renvoie la date en String a partir des 3 int d'un calendarView*/
+    @Test
+    public void getStringDateWithIntNumberWithSuccess(){
+       String DateWithInt = mDate.getStringDateWithIntNumber(2020, 12, 23);
+       assertEquals("2020-12-23", DateWithInt);
+        String DateWithIntZeroMustAdd = mDate.getStringDateWithIntNumber(2020, 1, 2);
+        assertEquals("2020-01-02", DateWithIntZeroMustAdd);
+    }
 }
