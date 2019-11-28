@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-
+        android:id="@+id/contain_calendar_dialog_meeting"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 

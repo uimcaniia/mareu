@@ -3,6 +3,7 @@
 
     <string name="action_settings">Filtrer par dates</string>
     <string name="action_settings2">Filtrer par lieu</string>
+    <string name="Annuler_le_filtre">annuler le filtre</string>
 
     <string name="newMeetTab2">Date</string>
     <string name="newMeetTab1">Ma réu</string>
@@ -23,4 +24,6 @@
     <string name="th_me_de_la_r_union">Thème de la réunion</string>
     <string name="mail_du_participant">mail du participant</string>
     <string name="case_a_cocher_pour_ajouter_la_liste_des_participants">case a cocher pour ajouter à la liste des participants</string>
+    <string name="nothing_metting_dial">Il n\'y a aucune réunion à filter.</string>
+
 </resources>

@@ -20,12 +20,13 @@
             app:srcCompat="@android:drawable/btn_dialog" />
 
     <TextView
+        android:id="@+id/nothingMeetingDial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:gravity="center_horizontal"
         android:textAlignment="center"
-        android:text="Il n'y a aucune réunion à filter." />
+        android:text="@string/nothing_metting_dial" />
 
     </RelativeLayout>
 </LinearLayout>

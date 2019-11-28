@@ -10,6 +10,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private MeetingService mMeetingService;
 
     public MeetingService getMeetingService() {
+       // mMeetingService = DI.getNewInstanceMeetingService();
         if (mMeetingService == null) mMeetingService = DI.getNewInstanceMeetingService();
         return mMeetingService;
     }

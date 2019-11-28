@@ -78,7 +78,18 @@ public class DateService {
         }
         return date;
     }
+    public String getStringDateWithIntNumber(int year, int month, int day) {
+        String putZeroMonth = "";
+        String putZeroDay = "";
 
+        if(month<10){
+            putZeroMonth = "0";
+        }
+        if(day<10){
+            putZeroDay = "0";
+        }
+        return year +"-"+putZeroMonth+month+"-"+putZeroDay+day;
+    }
 
     public Calendar addCalendarToDate(Date date, int nbDays){
         Calendar cal = new GregorianCalendar();

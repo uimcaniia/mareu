@@ -77,7 +77,7 @@ public class MeetingServiceTest {
     public void makeGoogOrderRoomListMeetingWithSuccess(){
         List<Meeting> mListMeetingNoFilter = MeetingListGenerator.DUMMY_INITIAL_MEETING_NO_FILTER;
         List<Meeting> mListMeetingAlreadyFilterByRoom = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_ROOM;
-        List<Meeting> newListFilter = mMeetingService.makeGoogOrderRoomListMeeting(mListMeetingNoFilter);
+        List<Meeting> newListFilter = mMeetingService.makeGoogOrderRoomListMeeting(mListMeetingNoFilter, mRoomSelect);
         Assert.assertEquals(mListMeetingAlreadyFilterByRoom, newListFilter);
     }
     /**filtre la liste de Meeting par Date*/
@@ -85,7 +85,7 @@ public class MeetingServiceTest {
     public void makeGoogOrderDateListMeetingWithSuccess() throws ParseException {
         List<Meeting> mListMeetingNoFilter = MeetingListGenerator.DUMMY_INITIAL_MEETING_NO_FILTER;
         List<Meeting> mListMeetingAlreadyFilterByRoom = MeetingListGenerator.DUMMY_MEETING_GOOD_ORDER_DATE;
-        List<Meeting> newListFilter = mMeetingService.makeGoogOrderDateListMeeting(mListMeetingNoFilter);
+        List<Meeting> newListFilter = mMeetingService.makeGoogOrderDateListMeeting(mListMeetingNoFilter, yearSelect, monthSelect, daySelect);
         Assert.assertEquals(mListMeetingAlreadyFilterByRoom, newListFilter);
     }
 

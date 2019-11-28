@@ -10,7 +10,7 @@ public class DI {
 
 
     public static MeetingService getMeetingService(){
-        service.setMeetingService(new FakeMeetingApiService());
+       // service.setMeetingService(new FakeMeetingApiService());
         return service;
     }
 

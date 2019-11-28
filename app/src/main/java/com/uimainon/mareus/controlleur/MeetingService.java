@@ -1,7 +1,5 @@
 package com.uimainon.mareus.controlleur;
 
-import android.widget.Toast;
-
 import com.uimainon.mareus.model.Meeting;
 import com.uimainon.mareus.model.Participant;
 import com.uimainon.mareus.model.ParticipantsList;
@@ -26,9 +24,11 @@ public class MeetingService {
     public MeetingService(MeetingApiService apiService) {
         this.apiService = apiService;
     }
-public void setMeetingService(MeetingApiService apiService){
-        this.apiService = apiService;
-}
+
+/*    public void setMeetingService(MeetingApiService apiService){
+            this.apiService = apiService;
+    }*/
+
     /** renvoie la liste des réunions  qui s'affichera dans le recyclerView */
     public List<Meeting> AllMeetings() {
         return apiService.AllMeetings();
@@ -162,70 +162,105 @@ public void setMeetingService(MeetingApiService apiService){
     }
 
     /**
-     * réorganise la liste des réunion suivant le filtre "par Room"
-     * @param mMeetingFilter liste des réunion à réorganiser
-     * @return liste de réunion
+     * renvoie la liste des réunion suivant le filtre "par Room"
+     * @param mMeetingFilter liste des réunion à réorganiser suivant la room sélectionnée
+     * @param mRoomSelect room sélectionnée servant de repaire
+     * @return liste de réunion (peut etre vide)
      */
-    public List<Meeting> makeGoogOrderRoomListMeeting(List<Meeting> mMeetingFilter) {
+    public List<Meeting> makeGoogOrderRoomListMeeting(List<Meeting> mMeetingFilter, Room mRoomSelect) {
+        int mLetterIndex = mRoomSelect.getName().length();
+        String mLetterFilter = mRoomSelect.getName().substring(mLetterIndex-1); // lettre filtre
+
         List<Meeting> listMeeting = new ArrayList<>(mMeetingFilter);
         List<Meeting> listGoodOrder = new ArrayList<>();
-        List<Room> mRoomList= apiService.getListAllRooms();
+        //List<Room> mRoomList= apiService.getListAllRooms();
+
         int sizeOfMeeting = listMeeting.size();
-        int sizeOfRoom = mRoomList.size();
-        for(int i = 0 ; i <sizeOfRoom ; i++){
-            int index = i;
-            for(int x = 0 ; x <sizeOfMeeting ; x++){
-                if(listMeeting.get(x).getRoom().getId() == index){
-                    listGoodOrder.add(listMeeting.get(x));
-                }
+       // int sizeOfRoom = mRoomList.size();
+
+        for(int i = 0 ; i <sizeOfMeeting ; i++){
+            int mLetterRoom = listMeeting.get(i).getRoom().getName().length();
+            String sLetterRoom = listMeeting.get(i).getRoom().getName().substring(mLetterIndex-1);
+            if(sLetterRoom.equals(mLetterFilter)){
+                listGoodOrder.add(listMeeting.get(i));
             }
         }
         return listGoodOrder;
     }
 
     /**
-     * reéorganise la liste des réunion suivant le filtre "par date"
-     * @param mMeetingFilter liste des réunion à réorganiser
-     * @return liste de réunion
+     * reéorganise et renvoie la liste des réunion suivant le filtre "par date"
+     * @param mMeetingFilter liste des réunion à filtrer suivant la date à comparer, puis réorganisée par ordre chronologique
+     * @param yearSelect année a comparer
+     * @param monthSelect mois a comparer
+     * @param daySelect jour a comparer
+     * @return liste de réunion (peut etre vide)
      * @throws ParseException
      */
-    public List<Meeting> makeGoogOrderDateListMeeting(List<Meeting> mMeetingFilter) throws ParseException {
-        List<Meeting> listMeeting = new ArrayList<>(mMeetingFilter);
+    public List<Meeting> makeGoogOrderDateListMeeting(List<Meeting> mMeetingFilter, int yearSelect, int monthSelect, int daySelect) throws ParseException {
+        String dateToCompare = mDateService.getStringDateWithIntNumber(yearSelect, monthSelect, daySelect);
+
+        List<Meeting> listMeeting = new ArrayList<>();
         List<Meeting> listGoodOrder = new ArrayList<>();
 
-        int sizeOfMeeting = mMeetingFilter.size();
 
-        listGoodOrder.add(listMeeting.get(0));// on ajoute le premier dans la liste pour commencer la comparaison
-        for(int i = 1 ; i <sizeOfMeeting ; i++){
-            int sizeListGoodOrder = listGoodOrder.size();
-            for (int x = 0; x < sizeListGoodOrder; x++) {
-                int result = mDateService.compareTwoDate(listMeeting.get(i).getDate(), listGoodOrder.get(x).getDate());
-                if(result < 0) {
-                    listGoodOrder.add(x, listMeeting.get(i));
-                    break;
-                }if (result == 0) {
-                    int resHourMinute = mDateService.compareTwoHourMinute(listMeeting.get(i).getHour(), listMeeting.get(i).getMinute(), listGoodOrder.get(x).getHour(), listGoodOrder.get(x).getMinute());
-                    if (resHourMinute < 0) {
+        int sizeOfMeetingWhithGoodDate = mMeetingFilter.size(); // on conserve que les meeting à la bonne date
+        for (int y = 0; y < sizeOfMeetingWhithGoodDate; y++) {
+            System.out.println(y+" reunion " + mMeetingFilter.get(y).getDate());
+            if (mMeetingFilter.get(y).getDate().equals(dateToCompare)) {
+                System.out.println(mMeetingFilter.get(y).getDate() + "date a comparer " + dateToCompare);
+                listMeeting.add(mMeetingFilter.get(y));
+            }
+        }
+        System.out.println(listMeeting);
+        int sizeOfMeeting = listMeeting.size(); // on les réorganise du plus récent au plus ancien
+        if (sizeOfMeeting == 0) { // si il n'y a rien, on renvoie la liste vide
+            System.out.println(sizeOfMeeting+" rien " + listGoodOrder);
+            return listGoodOrder;
+        }
+        if (sizeOfMeeting == 1) { // si il n'y a qu'une réunion, on renvoie la liste
+            listGoodOrder.add(listMeeting.get(0));
+            System.out.println(sizeOfMeeting+" 1 seule réunion " + listGoodOrder);
+            return listGoodOrder;
+        }
+        if (sizeOfMeeting > 1) {
+            System.out.println(sizeOfMeeting+" 2 au moins " + listGoodOrder);
+            listGoodOrder.add(listMeeting.get(0));// on ajoute le premier dans la liste pour commencer la comparaison
+            for (int i = 1; i < sizeOfMeeting; i++) {
+                int sizeListGoodOrder = listGoodOrder.size();
+                for (int x = 0; x < sizeListGoodOrder; x++) {
+                    int result = mDateService.compareTwoDate(listMeeting.get(i).getDate(), listGoodOrder.get(x).getDate());
+                    if (result < 0) {
                         listGoodOrder.add(x, listMeeting.get(i));
                         break;
                     }
-                    if (resHourMinute == 0) {
-                        listGoodOrder.add(listMeeting.get(i));
-                        break;
+                    if (result == 0) {
+                        int resHourMinute = mDateService.compareTwoHourMinute(listMeeting.get(i).getHour(), listMeeting.get(i).getMinute(), listGoodOrder.get(x).getHour(), listGoodOrder.get(x).getMinute());
+                        if (resHourMinute < 0) {
+                            listGoodOrder.add(x, listMeeting.get(i));
+                            break;
+                        }
+                        if (resHourMinute == 0) {
+                            listGoodOrder.add(listMeeting.get(i));
+                            break;
+                        }
+                        if (x == sizeListGoodOrder - 1) {
+                            listGoodOrder.add(listMeeting.get(i));
+                        }
                     }
-                    if (x == sizeListGoodOrder - 1) {
-                        listGoodOrder.add(listMeeting.get(i));
-                    }
-                }if (result > 0) {
-                    if(x == sizeListGoodOrder-1){
-                        listGoodOrder.add(listMeeting.get(i));
-                        break;
+                    if (result > 0) {
+                        if (x == sizeListGoodOrder - 1) {
+                            listGoodOrder.add(listMeeting.get(i));
+                            break;
+                        }
                     }
                 }
             }
         }
+        System.out.println("liste good ordre "+listGoodOrder);
         return listGoodOrder;
     }
+
 
 
     /**

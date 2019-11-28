@@ -17,8 +17,8 @@ public class FakeMeetingApiService implements MeetingApiService {
 
     public FakeMeetingApiService() {
         mListAllMeetings = MeetingListGenerator.generateArrMeeting();
-         rommService = new RoomListApiService();
-         participantService = new ParticipantListApiService();
+        rommService = new RoomListApiService();
+        participantService = new ParticipantListApiService();
     }
 
 

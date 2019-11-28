@@ -19,7 +19,9 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static androidx.test.InstrumentationRegistry.getInstrumentation;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
@@ -73,6 +75,42 @@ public class List_Meeting_ActivityTest {
         onView(withId(R.id.fab_add_new_metting )).perform(click());
         onView(allOf(withText("PARTICIPANTS"), isDescendantOfA(withId(R.id.tabs))));
     }
+
+    /** If we click on "menu filter by" + "filtrer par room", if we have meeting, show room dialog */
+    @Test
+    public void ifClickOnMenuItem_filterByRoom_showRoomDialogWindows() {
+        deleteItemRecyclerView(mListMeeting);
+        mListMeeting.clear();
+        addMeetingForTest();
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText(R.string.action_settings2)).perform(click());
+
+        onView(withId(R.id.gridviewRoom)).check(matches(isDisplayed()));
+    }
+
+    /** If we click on "menu filter by" + "filtrer par date", if we have meeting, show date dialog */
+    @Test
+    public void ifClickOnMenuItem_filterByDate_showDateDialogWindows() {
+        deleteItemRecyclerView(mListMeeting);
+        mListMeeting.clear();
+        addMeetingForTest();
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText(R.string.action_settings)).perform(click());
+
+        onView(withId(R.id.contain_calendar_dialog_meeting)).check(matches(isDisplayed()));
+    }
+
+    /** If we click on "menu filter by" +item, if we have not meeting, show nothing dialog */
+    @Test
+    public void ifClickOnMenuItem_noMeetingIsPresent_showNothingDialogWindows() {
+        deleteItemRecyclerView(mListMeeting);
+        mListMeeting.clear();
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText(R.string.action_settings)).perform(click());
+
+        onView(withId(R.id.nothingMeetingDial)).check(matches(isDisplayed()));
+    }
+
 
     /** If we add a meeting, show new view in first Activity*/
     @Test

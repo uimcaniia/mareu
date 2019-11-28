@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ListMeetingFragment extends Fragment {
+public class ListMeetingFragment extends Fragment implements DialogFragmentDateAndRoom.DialogListener {
 
     private static final int RESULT_OK = 1;
     private List<Meeting> mMeetings;
@@ -48,9 +51,9 @@ public class ListMeetingFragment extends Fragment {
     private List<Participant> mParticipant;
     private Room mRoom;
     private DateService mDate;
-    private DialogFragmentDateAndRoom mDialogFragmentRoom;
-    public static final int RESULT_ROOM = 1; //
-    public static final int RESULT_DATE = 2;
+    private DialogFragmentDateAndRoom mDialogFragment;
+/*    public static final int RESULT_ROOM = 1; //
+    public static final int RESULT_DATE = 2;*/
 
 
 
@@ -62,8 +65,7 @@ public class ListMeetingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setHasOptionsMenu(true);
-        mMeetingService = DI.getMeetingService();
+        setHasOptionsMenu(true);
         mDate = new DateService();
     }
 
@@ -79,9 +81,10 @@ public class ListMeetingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mMeetingService = DI.getMeetingService();
         mMeetings = mMeetingService.AllMeetings();
         try {
-            initList(mMeetings, "");
+            initList(mMeetings, null, 0, 0, 0);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -99,7 +102,9 @@ public class ListMeetingFragment extends Fragment {
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
+       menu.clear();
+       inflater.inflate(R.menu.menu_main, menu);
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -112,7 +117,8 @@ public class ListMeetingFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         mMeetings = mMeetingService.AllMeetings();
-        mDialogFragmentRoom = new DialogFragmentDateAndRoom();
+        DialogFragmentDateAndRoom mDialogFragmentRoom = new DialogFragmentDateAndRoom();
+        FragmentManager fm = getFragmentManager();
         Bundle args = new Bundle();
         if(mMeetings.size() == 0){
             args.putBoolean("showDateRoom", false);
@@ -123,68 +129,49 @@ public class ListMeetingFragment extends Fragment {
             case R.id.action_filter_date:
                 args.putBoolean("showRoom", false);
                 mDialogFragmentRoom.setArguments(args);
-                mDialogFragmentRoom.setTargetFragment(this, RESULT_DATE);
                 assert getFragmentManager() != null;
-                mDialogFragmentRoom.show(getFragmentManager().beginTransaction(), "MyRoomDialog");
-                filterBy("date");
+                mDialogFragmentRoom.setTargetFragment(ListMeetingFragment.this, 300);
+                mDialogFragmentRoom.show(fm, "MyRoomDialog");
+               // filterBy("date");
                 return true;
 
             case R.id.action_filter_room:
                 args.putBoolean("showRoom", true);
                 mDialogFragmentRoom.setArguments(args);
-                mDialogFragmentRoom.setTargetFragment(this, RESULT_ROOM);
                 assert getFragmentManager() != null;
-                mDialogFragmentRoom.show(getFragmentManager().beginTransaction(), "MyRoomDialog");
-                filterBy("room");
+                mDialogFragmentRoom.setTargetFragment(ListMeetingFragment.this, 300);
+                mDialogFragmentRoom.show(fm, "MyRoomDialog");
+                //filterBy("date");
+                return true;
+
+            case R.id.action_filter_none:
+                filterBy(null, 0,0, 0);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("fermeture dialogu" + requestCode);
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    //String mLetter = "";
-                    assert this.getArguments() != null;
-                    Room mRoomFilter = this.getArguments().getParcelable("room");
-                   // Bundle bundle = data.getExtras();
-                    //String mMonth = bundle.getString("letter", mLetter);
-                    System.out.println("oui room");
-                    System.out.println("coucou "+mRoomFilter);
-                } else if (resultCode == Activity.RESULT_CANCELED) {
-                    System.out.println("rien room");
-                }
+    public void callDialogDate(int year, int month, int day) {
+        Room roomNull = null;
+        filterBy(roomNull, year,month, day);
+    }
 
-            case 2:
-                if (resultCode == RESULT_OK) {
-                    //String mLetter = "";
-                    assert this.getArguments() != null;
-                    int mYearFilter = this.getArguments().getInt("YearFilter");
-                    int mMonthFilter = this.getArguments().getInt("MonthFilter");
-                    int mDayFilter = this.getArguments().getInt("DayFilter");
-                    // Bundle bundle = data.getExtras();
-                    //String mMonth = bundle.getString("letter", mLetter);
-                    System.out.println("coucou "+mYearFilter);
-                } else if (resultCode == Activity.RESULT_CANCELED) {
-                    System.out.println("rien date ");
-                }
-
-                break;
-        }
+    @Override
+    public void callDialogRoom(Room mRoom) {
+        filterBy(mRoom, 0,0, 0);
     }
 
     /**
      * réinitialise la liste des réunion en fonction du filtre choisie
-     * @param filterName
+     * @param
      */
-    private void filterBy(String filterName){
+    private void filterBy(Room mRoomSelect, int yearSelect, int monthSelect, int daySelect){
         mMeetings = mMeetingService.AllMeetings();
         try {
-            initList(mMeetings, filterName);
+            initList(mMeetings, mRoomSelect, yearSelect, monthSelect, daySelect);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -193,16 +180,16 @@ public class ListMeetingFragment extends Fragment {
     /**
      * Init la Liste des meeting
      * @param mMeetings
-     * @param keyMenu filtre sélectionné pour l'ordre d'affichage de la liste(room ou date) sinon vaut rien et affichere suivant l'ordre des ID des réunion
+     * @param  yearSelect sélectionné pour l'ordre d'affichage de la liste(room ou date) sinon vaut 0 et affichere suivant l'ordre des ID des réunion
      */
-    private void initList(List<Meeting> mMeetings, String keyMenu) throws ParseException {
+    private void initList(List<Meeting> mMeetings, Room mRoomSelect, int yearSelect, int monthSelect, int daySelect) throws ParseException {
         List<Meeting> mMeetingFilter = new ArrayList<>(mMeetings);
 
         if(mMeetingFilter.size()!=0) {
-            if(keyMenu.equals("date")){
-                mMeetingFilter = mMeetingService.makeGoogOrderDateListMeeting(mMeetingFilter);
-            }if(keyMenu.equals("room")){
-                mMeetingFilter = mMeetingService.makeGoogOrderRoomListMeeting(mMeetingFilter);
+            if((yearSelect != 0)&&(mRoomSelect == null)){ // on vérifie si il y a un filtre
+                mMeetingFilter = mMeetingService.makeGoogOrderDateListMeeting(mMeetingFilter, yearSelect, monthSelect, daySelect);
+            }if((yearSelect == 0)&&(mRoomSelect != null)){
+                mMeetingFilter = mMeetingService.makeGoogOrderRoomListMeeting(mMeetingFilter, mRoomSelect);
             }
         }
 
@@ -286,11 +273,12 @@ public class ListMeetingFragment extends Fragment {
         mMeetingService.deleteMeeting(event.meeting);
         mMeetings = mMeetingService.AllMeetings();
         try {
-            initList(mMeetings, "");
+            initList(mMeetings, null, 0,0,0);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
     }
+
 
 }
