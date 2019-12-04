@@ -2,7 +2,6 @@ package com.uimainon.mareus.service;
 
 import androidx.collection.ArraySet;
 
-import com.uimainon.mareus.controlleur.MeetingService;
 import com.uimainon.mareus.model.Meeting;
 import com.uimainon.mareus.model.Participant;
 
@@ -29,7 +28,6 @@ public class ParticipantListApiService {
      * @param hour
      * @param minute
      */
-
     public List<Participant> getListParticipantForThisDate(List<Meeting> mListAllMeetingsCreate, String date, int hour, int minute){
         Set<Participant> mListParticipantNotDispo = new ArraySet<>(); //=> contiendra les participant disponible
         List<Participant> mListOfAllParticipants = getListAllParticipant(); // => contient tous les participants de la boite
@@ -64,6 +62,13 @@ public class ParticipantListApiService {
         }
     }
 
+    /**
+     * AVANT DE VALIDER UNE REUNION
+     * vérifie si les participants choise sont effectivement disponible à la date et aux horaire choisir dans la réunion
+     * @param mListAllMeetingsCreate
+     * @param meetingToVerif
+     * @return booean si il y des participant déjà occupé ou pas
+     */
     public Boolean IsThatPossibleParticipant(List<Meeting> mListAllMeetingsCreate, Meeting meetingToVerif){
         Boolean b = true;
         if(mListAllMeetingsCreate.size() == 0){

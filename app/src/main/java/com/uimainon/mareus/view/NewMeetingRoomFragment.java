@@ -187,6 +187,7 @@ public class NewMeetingRoomFragment extends Fragment{
 
     /**
      * Action du bouton pour valider la création de la nouvelle réunion, ou la modification d'une réunion existante
+     * On prévient avec des Toast en cas de problème et on n'enregistre pas.
      * vérifie si la ROOM, la liste des participants, la date et l'heure choisis, sont valide et ou existante
      * Met a jour la réunion, ou ajoute dans la liste, la nouvelle réunion en vérifiant que l'ID de la réunion existe déjà
      * @param drawer
@@ -209,7 +210,7 @@ public class NewMeetingRoomFragment extends Fragment{
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    if((!a)||(!b)||(!d)){
+                    if((!a)||(!b)||(!d)){ // affichage des Toast en cas de problème
                         notPossibleDataShowError(a, b, d, mMeeting, drawer);
                     }else { // Si aucune erreur, on sauvegarde
                         saveActivity(mListMeeting, mMeeting, drawer);
@@ -264,6 +265,12 @@ public class NewMeetingRoomFragment extends Fragment{
 
     /**
      * affiche des messages d'erreur lors de l'enregistrement de la réunion
+     * Exemple d' erreur possible :
+     *      - si on sélectionne une date (fragment 1), puis des participants dispo (fragment 2), et qu'on change ensuite à nouveau la date (fragment 1) pour la faire empiéter sur une réunion déjà existante ou ce sont les même particpants.
+     *      - Même chose avec la Room en cas de changement après sélection de la date.
+     * Il serait mauvais de changer automatiquement les indisponibilité en disponibilités sans prévenir.
+     * Si le gérant de la réunion, veut absolument CES participants là, ou CETTE room là, il faut le prévenir de la non possibilité
+     * afin qu'il soit au courant et qu'il change alors la date ou fasse une conscession.
      */
     private void notPossibleDataShowError(Boolean a, Boolean b, Boolean d, Meeting mMeeting, View drawer){
         if(!a) {

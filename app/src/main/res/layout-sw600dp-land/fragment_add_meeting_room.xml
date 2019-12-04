@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/containerRecap"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/validMeetingView"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="@dimen/margin_bottom_fragment_room">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/theme_meeting"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/background_subject2"
+                    android:padding="@dimen/padding_subject"
+                    android:textSize="@dimen/size_list_participant"
+                    android:text="@string/th_me_de_la_r_union"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageCalendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="66dp"
+                    android:tint="@color/colorPrimaryFade"
+                    app:srcCompat="@drawable/ic_event_note_24px"
+                    tools:srcCompat="@drawable/ic_event_note_24px" />
+                <TextView
+                    android:id="@+id/dateMeeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_texte_icone_date"
+
+                    android:textStyle="bold"
+                    android:textSize="@dimen/size_title_fragment"
+                    android:text="@string/date"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginBottom="@dimen/margin_bottom_fragment_room"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="66dp"
+                    android:tint="@color/colorPrimaryFade"
+                    app:srcCompat="@drawable/ic_access_time_24px"
+                    tools:srcCompat="@drawable/ic_access_time_24px" />
+                <TextView
+                    android:id="@+id/hourMeeting"
+                    android:inputType="number"
+                    android:text="@string/horaire"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_texte_icone_date"
+                    android:textSize="@dimen/size_title_fragment" />
+                </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="66dp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/size_title_fragment"
+                    android:text="@string/salle_disponible"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_spinner"
+                android:layout_marginStart="@dimen/margin_spinner"
+                android:layout_marginEnd="@dimen/margin_spinner"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/background_spinner">
+
+                <Spinner
+                    android:id="@+id/spinnerRoom"
+                    android:theme="@style/AppTheme.NoTitleBar"
+                    android:layout_width="300dp"
+                    android:layout_height="@dimen/height_spinner"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="66dp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/size_title_fragment"
+                    android:text="@string/participants"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginBottom="@dimen/margin_bottom_fragment_room"
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/padding_top_list_participant"
+                android:paddingLeft="@dimen/padding_participant"
+                android:paddingRight="@dimen/padding_participant"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:padding="10dp"
+                    android:id="@+id/listParticipantAdded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/colorPrimaryFade"
+                    android:textSize="@dimen/size_list_participant" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginBottom="66dp"
+                android:paddingEnd="66dp"
+                android:paddingStart="66dp">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/valid_meeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:tint="@color/colorWhite"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_done_24px"
+                    tools:srcCompat="@drawable/ic_done_24px" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_back"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_clear_24px"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:tint="@color/colorWhite"
+                    app:srcCompat="@drawable/ic_clear_24px" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_top_pen"
+            android:layout_marginEnd="66dp"
+            android:tint="@color/colorPrimaryFade"
+        app:srcCompat="@drawable/ic_create_24px"/>
+
+
+    </RelativeLayout>
+</ScrollView>

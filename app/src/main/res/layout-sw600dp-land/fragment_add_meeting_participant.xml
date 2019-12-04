@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:id="@+id/item_list_email_participant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/recyclerview_participant_padding_start_end"
+            android:paddingTop="@dimen/recyclerview_participant_padding_top_bot"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:contentDescription="@string/mail_du_participant"
+            android:paddingBottom="@dimen/recyclerview_participant_padding_top_bot"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/recyclerview_participant_padding_margin_top"
+        android:layout_marginEnd="@dimen/recyclerview_participant_padding_start_end"
+        android:button="@drawable/check_custom"
+        android:buttonTint="@color/colorPrimaryFade"
+        android:contentDescription="@string/case_a_cocher_pour_ajouter_la_liste_des_participants"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

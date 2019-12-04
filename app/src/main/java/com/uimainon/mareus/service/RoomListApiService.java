@@ -67,11 +67,11 @@ public class RoomListApiService {
     }
 
     /**
-     * vérifie après avoir tenter de valider la création (ou modificaton) d'une réunion, si la Room est toujours dispo
-     * (si problème lors du rafraichissement des fragments en cas de motif de la date)
+     * AVANT DE VALIDER UNE REUNION
+     * vérifie si la ROOM choisie est effectivement disponible à la date et aux horaire choisir dans la réunion
      * @param mListAllMeetingsCreate liste de toute les réunion déjà créé
      * @param meetingToVerif meeting en création ou modification
-     * @return
+     * @return boolean si la Room est dispo ou non
      */
     public Boolean IsThatPossibleRoom(List<Meeting> mListAllMeetingsCreate, Meeting meetingToVerif) {
         boolean b = true;

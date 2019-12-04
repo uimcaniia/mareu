@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:id="@+id/listDateHour"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent">
+
+        <RelativeLayout
+            android:layout_marginEnd="30dp"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TimePicker
+                android:gravity="center_horizontal"
+                android:id="@+id/timePicker"
+                style="@android:style/Widget.Material.TimePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:headerBackground="@android:color/holo_blue_light"
+                android:numbersBackgroundColor="@color/colorWhite"
+                android:numbersTextColor="@color/colorPrimaryDark"
+                android:scrollbarSize="4dp"
+                android:timePickerMode="clock" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginStart="30dp"
+           android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+
+            <CalendarView
+                android:foregroundGravity="center_vertical"
+                android:id="@+id/calendar_meeting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:dateTextAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:measureAllChildren="false"
+                android:minWidth="200dp"
+                android:textAlignment="center" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>
