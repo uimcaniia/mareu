@@ -34,7 +34,7 @@
     <dimen name="margin_spinner">70dp</dimen>
     <dimen name="height_spinner">40dp</dimen>
 
-    <dimen name="size_title_fragment">18sp</dimen>
+    <dimen name="size_title_fragment">16sp</dimen>
     <dimen name="padding_top_list_participant">0dp</dimen>
     <dimen name="padding_participant">40dp</dimen>
     <dimen name="size_list_participant">16sp</dimen>

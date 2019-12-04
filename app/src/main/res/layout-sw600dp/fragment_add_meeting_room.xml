@@ -28,8 +28,8 @@
                     android:layout_width="match_parent"
                     android:gravity="center_horizontal"
                     android:background="@drawable/background_subject2"
-                    android:padding="@dimen/padding_subject"
-                    android:textSize="@dimen/size_list_participant"
+                    android:padding="20dp"
+                    android:textSize="18sp"
                     android:text="@string/th_me_de_la_r_union"
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_start_icone_date"
+                    android:layout_marginStart="66dp"
                     android:tint="@color/colorPrimaryFade"
                     app:srcCompat="@drawable/ic_event_note_24px"
                     tools:srcCompat="@drawable/ic_event_note_24px" />
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_start_icone_date"
+                    android:layout_marginStart="66dp"
                     android:tint="@color/colorPrimaryFade"
                     app:srcCompat="@drawable/ic_access_time_24px"
                     tools:srcCompat="@drawable/ic_access_time_24px" />
@@ -97,7 +97,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_start_texte_icone_date"
+                    android:layout_marginStart="66dp"
                     android:textStyle="bold"
                     android:textSize="@dimen/size_title_fragment"
                     android:text="@string/salle_disponible"/>
@@ -115,7 +115,7 @@
                 <Spinner
                     android:id="@+id/spinnerRoom"
                     android:theme="@style/AppTheme.NoTitleBar"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="@dimen/height_spinner"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
@@ -126,6 +126,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+
                 android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -133,7 +134,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_start_texte_icone_date"
+                    android:layout_marginStart="66dp"
                     android:textStyle="bold"
                     android:textSize="@dimen/size_title_fragment"
                     android:text="@string/participants"/>
@@ -162,7 +163,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:layout_marginBottom="66dp"
-                android:padding="@dimen/padding_div_btn_validate">
+                android:paddingEnd="66dp"
+                android:paddingStart="66dp">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/valid_meeting"
@@ -197,8 +199,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/margin_top_pen"
-            android:layout_marginEnd="@dimen/margin_end_pen"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="66dp"
             android:tint="@color/colorPrimaryFade"
         app:srcCompat="@drawable/ic_create_24px"/>
 

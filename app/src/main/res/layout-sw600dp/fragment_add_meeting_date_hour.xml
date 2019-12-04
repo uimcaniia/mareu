@@ -12,25 +12,36 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_marginBottom="60dp"
+            android:layout_height="match_parent">
 
             <TimePicker
                 android:id="@+id/timePicker"
+                style="@android:style/Widget.Material.TimePicker"
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
-                android:timePickerMode="spinner"
-                android:layout_height="wrap_content" />
+                android:headerBackground="@android:color/holo_blue_light"
+                android:numbersBackgroundColor="@color/colorWhite"
+                android:numbersTextColor="@color/colorPrimaryDark"
+                android:scrollbarSize="4dp"
+                android:timePickerMode="clock" />
         </RelativeLayout>
 
         <RelativeLayout
 
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="match_parent">
+
             <CalendarView
-                android:layout_centerHorizontal="true"
                 android:id="@+id/calendar_meeting"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:dateTextAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:measureAllChildren="false"
+                android:minWidth="500dp"
+                android:textAlignment="center" />
         </RelativeLayout>
 
 

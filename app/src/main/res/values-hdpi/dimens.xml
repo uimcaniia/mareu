@@ -32,14 +32,14 @@
 
     <dimen name="margin_bottom_spinner">35dp</dimen>
     <dimen name="margin_spinner">70dp</dimen>
-    <dimen name="height_spinner">40dp</dimen>
+    <dimen name="height_spinner">30dp</dimen>
 
-    <dimen name="size_title_fragment">18sp</dimen>
+    <dimen name="size_title_fragment">13sp</dimen>
     <dimen name="padding_top_list_participant">0dp</dimen>
     <dimen name="padding_participant">40dp</dimen>
-    <dimen name="size_list_participant">16sp</dimen>
+    <dimen name="size_list_participant">13sp</dimen>
 
-    <dimen name="size_recycler_participant">14sp</dimen>
+    <dimen name="size_recycler_participant">12sp</dimen>
     <dimen name="margin_start_icone_date">20dp</dimen>
     <dimen name="margin_start_texte_icone_date">30dp</dimen>
     <dimen name="margin_top_pen">10dp</dimen>

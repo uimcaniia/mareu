@@ -3,21 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/item_list_email_participant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/recyclerview_participant_padding_start_end"
-        android:paddingTop="@dimen/recyclerview_participant_padding_top_bot"
-        android:textStyle="bold"
-        android:textSize="@dimen/size_recycler_participant"
-        android:contentDescription="@string/mail_du_participant"
-        android:paddingBottom="@dimen/recyclerview_participant_padding_top_bot"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/item_list_email_participant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/recyclerview_participant_padding_start_end"
+            android:paddingTop="@dimen/recyclerview_participant_padding_top_bot"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:contentDescription="@string/mail_du_participant"
+            android:paddingBottom="@dimen/recyclerview_participant_padding_top_bot"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/checkBox"

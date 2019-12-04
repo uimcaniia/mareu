@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.View;
@@ -41,15 +42,8 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
     Fragment fragDate;
     Fragment fragParticipant;
     Fragment fragRoom;
-
-    private int mHour =9;
-    private int mMinute = 0;
-    private ParticipantsList mParticipant;
     protected ArrayList<Fragment> aFragments;
-    private refreshInfosFragments mRefreshFragment;
-    private Room mRoom;
     private MeetingService mMeetingService;
-
     private Meeting mNewOrModifMeeting;
 
     @Override
@@ -58,10 +52,10 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
         setContentView(R.layout.activity_add_meeting);
         mTabLayout = findViewById(R.id.tabs);
         mViewPager = findViewById(R.id.containerNewMeeting);
-        aFragments = new ArrayList<>();
-        fragDate = NewMeetingDateHourFragment.newInstance();
-        fragParticipant = NewMeetingParticipantFragment.newInstance();
-        fragRoom = NewMeetingRoomFragment.newInstance();
+       // detailFragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_detail);
+
+        //A - We only add DetailFragment in Tablet mode (If found frame_layout_detail)
+
 
         mMeetingService = DI.getMeetingService();
         Bundle bundle = getIntent().getExtras();
@@ -71,20 +65,23 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
         //On récupère la liste des meeting pour vérifier et si besoin, récupérer le meeting déjà créé et à modifier
         List<Meeting>mListMeeting = mMeetingService.AllMeetings();
 
-
         if (mListMeeting.size()!=0){
             int sizeList = mListMeeting.size();
             for(int i=0 ; i<sizeList ; i++){
                 if(mListMeeting.get(i).getIdMeeting()==mNewOrModifMeeting.getIdMeeting()){
                     // Attention!! le chemin référenciel n'est plus le même une fois transféré avec bundle entre les 2 activités!!
                     mNewOrModifMeeting = mListMeeting.get(i);// On copie les données de l'object de la liste vers son clone afin de lui redonner son chemin référenciel initial
-                    //On réenregistre l'objet dans la liste (en cas
-                    //mListMeeting.set(i, mNewOrModifMeeting);
                 }
             }
         }
         Bundle argsMeeting = new Bundle();
         argsMeeting.putParcelable("meeting", mNewOrModifMeeting);
+
+
+        aFragments = new ArrayList<>();
+        fragDate = NewMeetingDateHourFragment.newInstance();
+        fragParticipant = NewMeetingParticipantFragment.newInstance();
+        fragRoom = NewMeetingRoomFragment.newInstance();
 
         fragDate.setArguments(argsMeeting);
         fragParticipant.setArguments(argsMeeting);
@@ -95,11 +92,11 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
         aFragments.add(fragRoom);
         //---------------------------------------------------------------------------
         mPagerAdapter = new NewMeetingPagerAdapter(getSupportFragmentManager(), aFragments);
-        //mRefreshFragment = new refreshInfosFragments(mPagerAdapter);
-
         mViewPager.setAdapter(mPagerAdapter);
+
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
     }
 
     @Override

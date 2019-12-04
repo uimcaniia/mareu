@@ -23,6 +23,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
+            android:backgroundTint="@android:color/transparent"
+            android:foregroundTint="@android:color/transparent"
+            android:tint="@android:color/transparent"
             app:srcCompat="@android:drawable/btn_dialog" />
 
     </RelativeLayout>

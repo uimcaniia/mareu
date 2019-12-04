@@ -1,6 +1,5 @@
 package com.uimainon.mareus.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,7 +68,7 @@ public class ListMeetingFragment extends Fragment implements DialogFragmentDateA
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_nothing, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_meeting, container, false);
         configBtnAddNewMeeting(rootView);
         mRecyclerView = rootView.findViewById(R.id.list_meeting); // s'affichera si des réunion existe
         mTextViewNothing = rootView.findViewById(R.id.textViewNothing); // s'affichera si aucune réunion existe

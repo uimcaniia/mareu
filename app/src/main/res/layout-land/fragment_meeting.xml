@@ -16,6 +16,7 @@
         android:layout_marginLeft="@dimen/recycler_meeting_list_margin"
         android:layout_marginRight="@dimen/recycler_meeting_list_margin"
         android:visibility="visible"
+        tools:visibility="gone"
         android:layout_height="match_parent" />
 
     <TextView
@@ -24,6 +25,7 @@
         android:layout_gravity="center_horizontal"
         android:textAlignment="center"
         android:visibility="gone"
+        tools:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/nothingMeeting" />
@@ -32,13 +34,13 @@
         android:id="@+id/fab_add_new_metting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:clickable="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/margin_end_add_btn"
         android:layout_marginBottom="@dimen/margin_bottom_add_btn"
-        android:clickable="true"
-        app:srcCompat="@drawable/ic_add_24px"
-        tools:srcCompat="@drawable/ic_add_24px" />
+        tools:srcCompat="@drawable/ic_add_24px"
+        app:srcCompat="@drawable/ic_add_24px" />
 
 
 </RelativeLayout>

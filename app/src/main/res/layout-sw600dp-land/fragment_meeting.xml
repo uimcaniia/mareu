@@ -9,13 +9,14 @@
     <androidx.recyclerview.widget.RecyclerView
         tools:context=".view.ListMeetingFragment"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/fragment_meeting"
+        tools:listitem="@layout/adapter_meeting_item"
         android:id="@+id/list_meeting"
         android:name="com.uimainon.mareus.view.ListMeetingFragment"
         android:layout_width="match_parent"
-        android:layout_marginLeft="@dimen/recycler_meeting_list_margin"
-        android:layout_marginRight="@dimen/recycler_meeting_list_margin"
+        android:layout_marginLeft="96dp"
+        android:layout_marginRight="96dp"
         android:visibility="visible"
+        tools:visibility="visible"
         android:layout_height="match_parent" />
 
     <TextView
@@ -24,6 +25,8 @@
         android:layout_gravity="center_horizontal"
         android:textAlignment="center"
         android:visibility="gone"
+        tools:visibility="visible"
+        android:textSize="24sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/nothingMeeting" />
@@ -35,7 +38,7 @@
         android:clickable="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/margin_end_add_btn"
+        android:layout_marginEnd="112dp"
         android:layout_marginBottom="@dimen/margin_bottom_add_btn"
         tools:srcCompat="@drawable/ic_add_24px"
         app:srcCompat="@drawable/ic_add_24px" />
