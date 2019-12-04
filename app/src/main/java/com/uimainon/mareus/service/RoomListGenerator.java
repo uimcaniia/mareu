@@ -1,10 +1,7 @@
 package com.uimainon.mareus.service;
 
-import com.uimainon.mareus.R;
-import com.uimainon.mareus.model.Participant;
 import com.uimainon.mareus.model.Room;
 
-import java.nio.file.ClosedFileSystemException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

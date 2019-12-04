@@ -24,7 +24,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
+
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -173,9 +173,4 @@ public class List_Meeting_ActivityTest {
         onView(withId(R.id.list_meeting)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
         onView(withId(R.id.textViewNothing)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
-
-
-   //---------------------------------------------------------------------------------------------------------
-
-
 }

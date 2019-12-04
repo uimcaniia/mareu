@@ -13,6 +13,4 @@ public interface OnHeadlineSelectedListener {
     void callParticipantChanged(Participant participants, int dispoOrNotDispo);
     void callRoomChanged(Room mRoom);
     void callValidNewActivity();
-/*    void callDialogueDate(int year, int month, int day);
-    void callDialogRoom(Room mRoom);*/
 }

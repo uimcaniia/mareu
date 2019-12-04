@@ -5,16 +5,15 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
+/** Liste des participants composé d'object participant (parcelable) et qui ira en attribut à l'object Meeting (parcelable)
+ *  pour être ensuit transmit entre les 2 activités */
 public class ParticipantsList extends ArrayList<Participant> implements Parcelable {
 
-
     public ParticipantsList() {}
-
 
     public ParticipantsList(Parcel in){
             this.getFromParcel(in);
             }
-
 
     @SuppressWarnings("rawtypes")
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -29,7 +28,6 @@ public class ParticipantsList extends ArrayList<Participant> implements Parcelab
                 return null;
             }
     };
-
 
     @Override
     public int describeContents() {

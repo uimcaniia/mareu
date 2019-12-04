@@ -10,7 +10,6 @@ import com.uimainon.mareus.service.MeetingListGenerator;
 import com.uimainon.mareus.service.ParticipantListGenerator;
 import com.uimainon.mareus.service.RoomListGenerator;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;

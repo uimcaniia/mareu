@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Room implements Parcelable {
 
-    /**numéro due al salle de réunion*/
+    /**numéro de la salle de réunion*/
     private Integer id;
     /**nom de la salle*/
     private String name;

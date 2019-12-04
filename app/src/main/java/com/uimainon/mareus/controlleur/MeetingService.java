@@ -17,17 +17,11 @@ public class MeetingService {
 
     private MeetingApiService apiService;
     private DateService mDateService = new DateService();
-    private int hourStartDay = mDateService.giveHourStartDay();
-    private int hourEndDay = mDateService.giveHourEndDay();
     private Meeting mNewMeeting;
 
     public MeetingService(MeetingApiService apiService) {
         this.apiService = apiService;
     }
-
-/*    public void setMeetingService(MeetingApiService apiService){
-            this.apiService = apiService;
-    }*/
 
     /** renvoie la liste des réunions  qui s'affichera dans le recyclerView */
     public List<Meeting> AllMeetings() {
@@ -52,20 +46,23 @@ public class MeetingService {
        apiService.addMeetingToList(meeting);
     }
 
-    /**
-     * TRouve la liste des participants disponible à la date et aux horaires souhaités
-     * on retire ceux déjà en réunion avant et après - de 70 min avant et après l'heure voulue
-     */
+    /** TRouve la liste des participants disponible à la date et aux horaires souhaités */
     public List<Participant> getListParticipantForThisDate(String date, int hour, int minute){
         return apiService.getListParticipantForThisDate(date, hour, minute);
     }
 
-    /**
-     * TRouve la liste des Room disponible à la date et aux horaires souhaités
-     * on retire celles déjà réservées réunion avant et après - de 70 min avant et après l'heure voulue
-     */
+    /** TRouve la liste des Room disponible à la date et aux horaires souhaités */
     public List<Room> getListRoomForThisDate(String date, int hour, int minute){
         return apiService.getListRoomForThisDate(date, hour, minute);
+    }
+
+    /** vérifie si les participants choisie sont effectivement disponible à la date et aux horaire choisir dans la réunion*/
+    public Boolean IsThatPossibleParticipant(Meeting meetingToVerif) {
+        return apiService.IsThatPossibleParticipant(meetingToVerif);
+    }
+    /** vérifie si la Room choisie est effectivement disponible à la date et aux horaire choisir dans la réunion*/
+    public Boolean IsThatPossibleRoom(Meeting meetingToVerif) {
+        return apiService.IsThatPossibleRoom(meetingToVerif);
     }
 
     /**
@@ -78,10 +75,10 @@ public class MeetingService {
     public int searchIfRoomDispoForOtherTime(String date, int hour, int minute) {
         int goodHour = 0;
         if(hour == 0){ // si on cherche sur une nouvelle journée, hour sera à 0 sinon elle vaudra l'heure de la précédente recherche dans la même journée
-            hour = hourStartDay;
+            hour = mDateService.giveHourStartDay();
         }
         List<Room> searchNewListeOfRooms;
-        for(int i = hour ; i < hourEndDay ; i++){
+        for(int i = hour ; i < mDateService.giveHourEndDay(); i++){
             searchNewListeOfRooms = getListRoomForThisDate(date, i, minute);
             if(searchNewListeOfRooms.size()!=0){
                 goodHour = i;
@@ -91,20 +88,6 @@ public class MeetingService {
         return goodHour;
     }
 
-/**
- * vérifie après avoir voulu valider la création (ou modification) d'une réunion, si les participant sont effectivement disponible
- * (en cas de modif de la date pour validation sans savoir si les participant sont dispo)
- * */
-    public Boolean IsThatPossibleParticipant(Meeting meetingToVerif) {
-        return apiService.IsThatPossibleParticipant(meetingToVerif);
-    }
-    /**
-     * vérifie après avoir voulu valider la création (ou modification) d'une réunion, si la Room est effectivement disponible
-     * (en cas de modif de la date pour validation sans savoir si la Room est dispo)
-     * */
-    public Boolean IsThatPossibleRoom(Meeting meetingToVerif) {
-        return apiService.IsThatPossibleRoom(meetingToVerif);
-    }
 
     /**
      * complète et réorganise la liste des Room DISPONIBLE dans l'ordre alphabétique.
@@ -251,8 +234,6 @@ public class MeetingService {
         return listGoodOrder;
     }
 
-
-
     /**
      * retourne le prochain Id pour la futur nouvelle réunion
      * @return
@@ -266,8 +247,6 @@ public class MeetingService {
         }
         return idMeeting;
     }
-
-
 
 
     /** prend par défault la date d'aujourd'hui et l'heure courante.

@@ -31,18 +31,12 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withResourceName;
-import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.uimainon.mareus.rooteur.utils.RecyclerViewItemCountAssertion.addMeetingWithEveryParticipantForTest;
-import static com.uimainon.mareus.rooteur.utils.RecyclerViewItemCountAssertion.addMeetingWithEveryRoomForTest;
 import static com.uimainon.mareus.rooteur.utils.RecyclerViewItemCountAssertion.deleteItemRecyclerView;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasEntry;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsNull.notNullValue;
-import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.*;
 
 public class Add_Meeting_ActivityTest {

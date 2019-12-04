@@ -11,6 +11,9 @@ import java.util.List;
 
 public abstract class MeetingListGenerator {
 
+    /**
+     * MeetingListGenerator NE SERT QUE POUR LES TEST
+     */
     public static List<Meeting> mListAllMeetings = new ArrayList<Meeting>();
 
     public static List<Meeting> generateArrMeeting(){

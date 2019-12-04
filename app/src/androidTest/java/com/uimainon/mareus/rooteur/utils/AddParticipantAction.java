@@ -23,7 +23,6 @@ public class AddParticipantAction implements ViewAction {
     @Override
     public void perform(UiController uiController, View view) {
         View button = view.findViewById(R.id.checkBox);
-        // Maybe check for null
         button.performClick();
     }
 }

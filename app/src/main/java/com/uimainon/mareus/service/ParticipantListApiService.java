@@ -15,7 +15,6 @@ public class ParticipantListApiService {
     private DateService mDateService = new DateService();
 
     /**renvoie la liste de tous les participant de la boite*/
-
     public List<Participant> getListAllParticipant(){
         return mListAllParticipants;
     }
@@ -23,8 +22,8 @@ public class ParticipantListApiService {
     /**
      * TRouve la liste des participants disponible à la date et aux horaires souhaités
      *  on retire ceux déjà en réunion avant et après - de 70 min avant et après l'heure voulue
-     * @param mListAllMeetingsCreate récupère toutes les réunions
-     * @param date
+     * @param mListAllMeetingsCreate possède toutes les réunions
+     * @param date date choisie
      * @param hour
      * @param minute
      */

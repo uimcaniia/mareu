@@ -21,17 +21,18 @@ public class FakeMeetingApiService implements MeetingApiService {
         participantService = new ParticipantListApiService();
     }
 
-
     /** renvoie la liste des réunions  qui s'affichera dans le recyclerView */
     @Override
     public List<Meeting> AllMeetings() {
         return mListAllMeetings;
     }
 
+    /** renvoie la liste de TOUT les Room*/
     @Override
     public List<Room> getListAllRooms() {
         return rommService.getListAllRooms();
     }
+    /** renvoie la liste de TOUT les Participants*/
     @Override
     public List<Participant> getListAllParticipant(){
         return participantService.getListAllParticipant();
@@ -47,39 +48,27 @@ public class FakeMeetingApiService implements MeetingApiService {
         mListAllMeetings.add(meeting);
     }
 
-    /**
-     * TRouve la liste des participants disponible à la date et aux horaires souhaités
-     * on retire ceux déjà en réunion avant et après - de 70 min avant et après l'heure voulue
-     * @param date
-     * @param hour
-     * @param minute
-     * @return
-     */
+    /** TRouve la liste des participants disponible à la date et aux horaires souhaités */
     @Override
     public List<Participant> getListParticipantForThisDate(String date, int hour, int minute){
-       // mListAllMeetings = AllMeetings();
         return participantService.getListParticipantForThisDate(mListAllMeetings, date, hour, minute);
     }
 
-    /**
-     * TRouve la liste des Room disponible à la date et aux horaires souhaités
-     * on retire celles déjà réservées réunion avant et après - de 70 min avant et après l'heure voulue
-     */
+    /** TRouve la liste des Room disponible à la date et aux horaires souhaités */
     @Override
     public List<Room> getListRoomForThisDate(String date, int hour, int minute){
-      //  mListAllMeetings = AllMeetings();
         return rommService.getListRoomDispo(mListAllMeetings, date, hour, minute);
     }
 
+     /** vérifie si les participants choisie sont effectivement disponible à la date et aux horaire choisir dans la réunion*/
     @Override
     public Boolean IsThatPossibleParticipant(Meeting meeting) {
-       // mListAllMeetings = AllMeetings();
         return participantService.IsThatPossibleParticipant(mListAllMeetings, meeting);
     }
 
+    /** vérifie si la Room choisie est effectivement disponible à la date et aux horaire choisir dans la réunion*/
     @Override
     public Boolean IsThatPossibleRoom(Meeting meeting) {
-      //  mListAllMeetings = AllMeetings();
         return rommService.IsThatPossibleRoom(mListAllMeetings, meeting);
     }
 

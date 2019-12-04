@@ -8,7 +8,6 @@ public class Participant implements Parcelable {
     /** participant Id */
     protected int id;
 
-
     /** participant email */
     protected String email;
 
@@ -78,19 +77,18 @@ public class Participant implements Parcelable {
         return 0 ;
     }
 
-
     //On ecrit dans le parcel les données de notre objet
-    @Override public void writeToParcel ( Parcel dest , int flags ) {
-        dest.writeInt ( this . id );
-        dest.writeString ( this . email );
+    @Override public void writeToParcel (Parcel dest, int flags) {
+        dest.writeInt ( this.id );
+        dest.writeString ( this.email );
         dest.writeInt(this.isDispo);
     }
 
     //On va ici hydrater notre objet à partir du Parcel
     public void getFromParcel(Parcel in)
     {
-        this . id = in .readInt ();
-        this . email = in .readString ();
+        this.id = in .readInt ();
+        this.email = in .readString ();
         this.isDispo = in.readInt();
     }
 }

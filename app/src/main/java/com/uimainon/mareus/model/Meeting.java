@@ -3,6 +3,7 @@ package com.uimainon.mareus.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/** Object complexe qui passera entre les 2 activités et qui implémente donc Parcelable*/
 public class Meeting implements Parcelable {
 
     int idMeeting;
@@ -120,6 +121,9 @@ public class Meeting implements Parcelable {
         return 0 ;
     }
 
+    /**Là on écrit dans la Parcel les informations importantes de ta classe.
+     * Les informations vont transiter via la Parcel, et ensuite nous recréerons notre instance de Meeting depuis la Parcel.
+     * Ce qui va passer entre les deux activités ce n'est pas directement l'instance de Meeting, mais c'est l'objet de type Parcel (et qui contient les informations de l'instance de Meeting).*/
     @Override public void writeToParcel ( Parcel dest , int flags ) {
         dest.writeInt (this.idMeeting);
         dest.writeString (this.date);
@@ -129,9 +133,5 @@ public class Meeting implements Parcelable {
         dest.writeParcelable(this.participants, flags);
         dest.writeParcelable(this.room, flags);
     }
-
-/*    @Override public String toString () {
-        return "Student{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", grade='" + grade + '\'' + '}' ;
-    }*/
 
 }

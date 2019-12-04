@@ -1,15 +1,10 @@
 package com.uimainon.mareus.rooteur;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-
-import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TimePicker;
 
@@ -17,19 +12,15 @@ import com.google.android.material.tabs.TabLayout;
 import com.uimainon.mareus.R;
 
 import com.uimainon.mareus.base.BaseActivity;
-import com.uimainon.mareus.controlleur.refreshInfosFragments;
-import com.uimainon.mareus.controlleur.OnHeadlineSelectedListener;
 import com.uimainon.mareus.di.DI;
 import com.uimainon.mareus.model.Meeting;
 import com.uimainon.mareus.model.Participant;
-import com.uimainon.mareus.model.ParticipantsList;
 import com.uimainon.mareus.model.Room;
 import com.uimainon.mareus.controlleur.MeetingService;
 import com.uimainon.mareus.view.NewMeetingDateHourFragment;
 import com.uimainon.mareus.view.NewMeetingParticipantFragment;
 import com.uimainon.mareus.view.NewMeetingRoomFragment;
 import com.uimainon.mareus.view.NewMeetingPagerAdapter;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +34,6 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
     Fragment fragParticipant;
     Fragment fragRoom;
     protected ArrayList<Fragment> aFragments;
-    private MeetingService mMeetingService;
     private Meeting mNewOrModifMeeting;
 
     @Override
@@ -52,12 +42,8 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
         setContentView(R.layout.activity_add_meeting);
         mTabLayout = findViewById(R.id.tabs);
         mViewPager = findViewById(R.id.containerNewMeeting);
-       // detailFragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_detail);
 
-        //A - We only add DetailFragment in Tablet mode (If found frame_layout_detail)
-
-
-        mMeetingService = DI.getMeetingService();
+        MeetingService mMeetingService = DI.getMeetingService();
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
 
@@ -77,7 +63,6 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
         Bundle argsMeeting = new Bundle();
         argsMeeting.putParcelable("meeting", mNewOrModifMeeting);
 
-
         aFragments = new ArrayList<>();
         fragDate = NewMeetingDateHourFragment.newInstance();
         fragParticipant = NewMeetingParticipantFragment.newInstance();
@@ -96,7 +81,6 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
     }
 
     @Override
@@ -115,7 +99,6 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
         }
     }
 
-    //******************************************************************************************************
     /**
      * rafraichit les infos des fragment suite au changement d'heure dans le fragment 0 et l'inscrit dans l'object meeting en cour
      * @param view
@@ -148,7 +131,7 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
         }
         transactionRoom.commit();
     }
-    //******************************************************************************************************
+
     /**
      * rafraichit les infos des fragments suite au changement de date dans le fragment 0 et l'inscrit dans l'object meeting en cour
      * @param view
@@ -192,7 +175,7 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
         }
         transactionRoom.commit();
     }
-    //******************************************************************************************************
+
     /**
      * rafraichit les infos des fragments suite au changement de participant dans le fragment 1 et l'inscrit dans l'object meeting en cour
      * 1 => plus dispo (on l'ajoute dans la liste)
@@ -209,7 +192,6 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
             addParticipant.setDispo(1);
             mNewOrModifMeeting.getParticipants().add(addParticipant);
         }else{
-
             Participant addParticipant = participants;
             addParticipant.setDispo(0);
             mNewOrModifMeeting.getParticipants().remove(addParticipant);
@@ -237,7 +219,6 @@ public class AddMeetingActivity extends BaseActivity implements NewMeetingDateHo
     /**
      * Récupère la salle de réunion sélectionné et l'inscrit dans l'object meeting en cour
      * @param mRoom
-
      */
     @Override
     public void callRoomChanged(Room mRoom) {
