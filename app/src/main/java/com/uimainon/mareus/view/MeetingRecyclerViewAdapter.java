@@ -28,7 +28,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     private final List<Meeting> mMeeting;
     private DateService mDateService;
-    private String dateFr ="";
 
     public MeetingRecyclerViewAdapter(List<Meeting> items) {
         mMeeting = items;
@@ -47,11 +46,11 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         Meeting meeting = mMeeting.get(position);
 
         String mListInfos="";
-        dateFr = mDateService.getGoodFormatFrenchDate(meeting.getDate());
+        String dateFr = mDateService.getGoodFormatFrenchDate(meeting.getDate());
         if(meeting.getMinute() < 10){
-            mListInfos = dateFr+" - "+meeting.getHour()+"h0"+meeting.getMinute()+" - "+meeting.getSubject();
+            mListInfos = dateFr +" - "+meeting.getHour()+"h0"+meeting.getMinute()+" - "+meeting.getSubject();
         }else{
-            mListInfos = dateFr+" - "+meeting.getHour()+"h"+meeting.getMinute()+" - "+meeting.getSubject();
+            mListInfos = dateFr +" - "+meeting.getHour()+"h"+meeting.getMinute()+" - "+meeting.getSubject();
         }
         holder.mNameRoomHour.setText(mListInfos); // infos de la réunion (date, heure et thème)
 
@@ -95,7 +94,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     public int getItemCount() {
         return mMeeting.size();
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView mCircleColor;

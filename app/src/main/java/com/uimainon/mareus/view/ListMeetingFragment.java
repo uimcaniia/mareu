@@ -49,10 +49,6 @@ public class ListMeetingFragment extends Fragment implements DialogFragmentDateA
     private Room mRoom;
     private DateService mDate;
     private DialogFragmentDateAndRoom mDialogFragment;
-/*    public static final int RESULT_ROOM = 1; //
-    public static final int RESULT_DATE = 2;*/
-
-
 
     public static ListMeetingFragment newInstance() {
         ListMeetingFragment fragment = new ListMeetingFragment();
@@ -129,7 +125,6 @@ public class ListMeetingFragment extends Fragment implements DialogFragmentDateA
                 assert getFragmentManager() != null;
                 mDialogFragmentRoom.setTargetFragment(ListMeetingFragment.this, 300);
                 mDialogFragmentRoom.show(fm, "MyRoomDialog");
-               // filterBy("date");
                 return true;
 
             case R.id.action_filter_room:
@@ -138,7 +133,6 @@ public class ListMeetingFragment extends Fragment implements DialogFragmentDateA
                 assert getFragmentManager() != null;
                 mDialogFragmentRoom.setTargetFragment(ListMeetingFragment.this, 300);
                 mDialogFragmentRoom.show(fm, "MyRoomDialog");
-                //filterBy("date");
                 return true;
 
             case R.id.action_filter_none:
@@ -247,8 +241,6 @@ public class ListMeetingFragment extends Fragment implements DialogFragmentDateA
         });
     }
 
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -274,7 +266,6 @@ public class ListMeetingFragment extends Fragment implements DialogFragmentDateA
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
 

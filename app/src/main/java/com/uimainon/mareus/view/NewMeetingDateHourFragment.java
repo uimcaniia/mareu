@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.uimainon.mareus.R;
-import com.uimainon.mareus.controlleur.OnHeadlineSelectedListener;
 import com.uimainon.mareus.model.Meeting;
 
 import java.util.Calendar;

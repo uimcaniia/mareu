@@ -21,7 +21,6 @@ public class DateService {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-
     public int giveYear(){
         return mYear;
     }
@@ -45,8 +44,14 @@ public class DateService {
         return 17;
     }
 
-
-
+    /**
+     * renvoie l'heure française en prenant en compte le changement d'heure été et hivers
+     * @param year année en cour
+     * @param hour heure en cour
+     * @param todayToCompareWithSaison date sélectionnée à comparer
+     * @return l'heure française suivant todayToCompareWithSaison
+     * @throws ParseException
+     */
     public int giveTheGoodHourInFrance(int year, int hour, Date todayToCompareWithSaison) throws ParseException {
 
         Date eteInYear = sdf.parse(year+"-03-31");
@@ -65,10 +70,16 @@ public class DateService {
         if((changeHourHiver == 0)||(changeHourHiver > 0)&&(changeHourAfter < 0)){
             giveGoodHour = hour+1;
         }
-       // System.out.println(giveGoodHour);
         return giveGoodHour;
     }
 
+    /**
+     * retourne un format date formater "year-month-day" a partir de 3 int
+     * @param year
+     * @param month
+     * @param day
+     * @return date formater pour la comparer
+     */
     public Date formatDateToCompare(int year, int month, int day){
         Date date = null;
         try {
@@ -78,6 +89,15 @@ public class DateService {
         }
         return date;
     }
+
+    /**
+     * transforme les 3 int d'une date (year month day) au format String "year-month-day"
+     * en ajoutant si besoin un zéro devant des nombres composé d'un seul chiffre
+     * @param year
+     * @param month
+     * @param day
+     * @return string de la date formater
+     */
     public String getStringDateWithIntNumber(int year, int month, int day) {
         String putZeroMonth = "";
         String putZeroDay = "";
@@ -91,6 +111,12 @@ public class DateService {
         return year +"-"+putZeroMonth+month+"-"+putZeroDay+day;
     }
 
+    /**
+     * récupère un nouveau calendrier suivant la date en paramètre et en agmentant le jour
+     * @param date
+     * @param nbDays nbr de jour à augmenter
+     * @return
+     */
     public Calendar addCalendarToDate(Date date, int nbDays){
         Calendar cal = new GregorianCalendar();
         cal.setTime(date);
@@ -98,6 +124,12 @@ public class DateService {
         return cal;
     }
 
+    /**
+     * retourne un format String "year-month-day" a partir d'un format Date
+     * en ajoutant si besoin un zéro devant des nombres composé d'un seul chiffre
+     * @param otherDate
+     * @return
+     */
     public String getStringDate(Calendar otherDate) {
         int year = otherDate.get(Calendar.YEAR);
         int month = otherDate.get(Calendar.MONTH);
@@ -115,6 +147,11 @@ public class DateService {
         return year +"-"+putZeroMonth+month+"-"+putZeroDay+day;
     }
 
+    /**
+     * transforme pour l'affichage en format français "jour - mois - année"
+     * @param dateUs
+     * @return String date française.
+     */
     public String getGoodFormatFrenchDate(String dateUs){
         String[] splitArray = dateUs.split("-");
         String putZeroMonth = "";
@@ -130,10 +167,71 @@ public class DateService {
         if(mDay<10){
             putZeroDay = "0";
         }
-
         return putZeroDay+mDay +"-"+putZeroMonth+mMonth+"-"+mYear;
     }
 
+    /**
+     * Comaper 2 date pour savoir si la première est déjà passée, si c'est la même ou si elle est pas encore passée.
+     * @param firstDate
+     * @param secondDate
+     * @return int -1 si passé, 0 si c'est la même, 1 si c'est après
+     * @throws ParseException
+     */
+    public int compareTwoDate(String firstDate, String secondDate) throws ParseException {
+        Date first = sdf.parse(firstDate);
+        Date second = sdf.parse(secondDate);
+        return first.compareTo(second);
+    }
+
+    /**
+     * Comparer 2 horaire (heure et minute) et renvoie si l'horaire est déjà passé, si c'est le même ou si pas encore passé
+     * @param firstHour
+     * @param firstMinute
+     * @param secondHour
+     * @param secondMinute
+     * @return int -1 si passé, 0 si c'est la même, 1 si c'est après
+     */
+    public int compareTwoHourMinute(int firstHour, int firstMinute,  int secondHour, int secondMinute){
+        int timeFirst = firstHour*60 + firstMinute;
+        int timeSecond = secondHour*60 + secondMinute;
+        int result = 0;
+        if(timeFirst > timeSecond){
+            result = 1;
+        }
+        if(timeFirst < timeSecond){
+            result = -1;
+        }
+        return result;
+    }
+
+
+    /**
+     * calcule le temps entre 2 horaire. Convertit les heures en minutes
+     * @param firstHour
+     * @param firstMinute
+     * @param secondHour
+     * @param secondMinute
+     * @return la différence en minute
+     */
+    public int getTimeBetweenTwoHours(int firstHour, int firstMinute,  int secondHour, int secondMinute){
+        int firstTime = firstHour * 60 + firstMinute;
+        int secondTime = secondHour * 60 + secondMinute;
+        int timeDiff = 0;
+        if (firstTime >= secondTime) {
+            timeDiff = firstTime - secondTime;
+        } else {
+            timeDiff = secondTime - firstTime;
+        }
+        return timeDiff;
+    }
+
+    /**
+     * AVANT DE VALIDER UNE REUNION!
+     * compare la date de la réunion et la date d'aujourd'hui pour savoir si la date est déjà passée, si c'est la même ou si elle est après
+     * @param mMeeting
+     * @return int -1 si passé, 0 si c'est la même, 1 si c'est après
+     * @throws ParseException
+     */
     public int isThatPossibleDate(Meeting mMeeting) throws ParseException {
         Calendar mNewCalendar = Calendar.getInstance();
 
@@ -151,38 +249,12 @@ public class DateService {
 
         return dDateMeeting.compareTo(today);
     }
-
-    public int compareTwoDate(String firstDate, String secondDate) throws ParseException {
-        Date first = sdf.parse(firstDate);
-        Date second = sdf.parse(secondDate);
-        return first.compareTo(second);
-    }
-
-    public int compareTwoHourMinute(int firstHour, int firstMinute,  int secondHour, int secondMinute){
-        int timeFirst = firstHour*60 + firstMinute;
-        int timeSecond = secondHour*60 + secondMinute;
-        int result = 0;
-        if(timeFirst > timeSecond){
-            result = 1;
-        }
-        if(timeFirst < timeSecond){
-            result = -1;
-        }
-        return result;
-    }
-
-    public int getTimeBetweenTwoHours(int firstHour, int firstMinute,  int secondHour, int secondMinute){
-        int firstTime = firstHour * 60 + firstMinute;
-        int secondTime = secondHour * 60 + secondMinute;
-        int timeDiff = 0;
-        if (firstTime >= secondTime) {
-            timeDiff = firstTime - secondTime;
-        } else {
-            timeDiff = secondTime - firstTime;
-        }
-        return timeDiff;
-    }
-
+    /**
+     * AVANT DE VALIDER UNE REUNION!
+     * Vérifie si l'horaire de la réunion passé en paramètre est possible (si elle n'est pas déjà passée)
+     * @param mMeeting
+     * @return boolean si c'est un horaire possible ou non
+     */
     public Boolean verifIfTimeIsPossible(Meeting mMeeting) {
         Calendar mNewCalendar = Calendar.getInstance();
         boolean b = true;
@@ -204,7 +276,6 @@ public class DateService {
 
         int timeMeeting = mMeeting.getHour() * 60 + mMeeting.getMinute();
         int timeToday = goodHourInFrance * 60 + minute;
-      // System.out.println(timeMeeting + "  "+ timeToday+"   ");
         if(timeToday > timeMeeting){
             b = false;
         }

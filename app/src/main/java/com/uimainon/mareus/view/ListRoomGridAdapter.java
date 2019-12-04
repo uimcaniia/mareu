@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.uimainon.mareus.R;
 import com.uimainon.mareus.events.ChoiceRoomEvent;
-import com.uimainon.mareus.events.DeleteMeetingEvent;
 import com.uimainon.mareus.model.Room;
 
 import org.greenrobot.eventbus.EventBus;
