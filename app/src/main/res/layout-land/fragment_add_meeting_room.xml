@@ -173,7 +173,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:tint="@color/colorWhite"
-                    app:backgroundTint="@color/colorPrimary"
+                    app:backgroundTint="@color/colorAccent"
                     app:srcCompat="@drawable/ic_done_24px"
                     tools:srcCompat="@drawable/ic_done_24px" />
 
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_clear_24px"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorAccent"
                     android:clickable="true"
                     android:focusable="true"
                     android:tint="@color/colorWhite"
