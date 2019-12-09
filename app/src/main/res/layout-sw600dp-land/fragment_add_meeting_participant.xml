@@ -15,7 +15,7 @@
             android:paddingStart="@dimen/recyclerview_participant_padding_start_end"
             android:paddingTop="@dimen/recyclerview_participant_padding_top_bot"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="@dimen/size_recycler_participant"
             android:contentDescription="@string/mail_du_participant"
             android:paddingBottom="@dimen/recyclerview_participant_padding_top_bot"
             app:layout_constraintStart_toStartOf="parent"

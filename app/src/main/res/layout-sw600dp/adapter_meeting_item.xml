@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/item_circle_color_meeting"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="@dimen/circle_color_size"
+        android:layout_height="@dimen/circle_color_size"
         android:layout_marginStart="0dp"
         android:layout_marginTop="@dimen/recyclerview_participant_padding_top_bot"
         android:layout_marginBottom="5dp"
@@ -29,7 +29,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/colorFont"
-        android:textSize="20sp"
+        android:textSize="@dimen/size_title_fragment"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/item_list_mail_participant"
         app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/recycler_meeting_margin_start"
         android:textColor="@color/colorFont"
-        android:textSize="16sp"
+        android:textSize="@dimen/list_mail_list_meeting"
         android:layout_marginEnd="@dimen/recycler_meeting_margin_end"
         app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
         app:layout_constraintBottom_toBottomOf="@+id/item_circle_color_meeting"
@@ -55,8 +55,8 @@
 
     <ImageButton
         android:id="@+id/item_list_delete_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/garbadge_height_width"
+        android:layout_height="@dimen/garbadge_height_width"
         android:layout_marginEnd="0dp"
         android:background="@null"
         android:contentDescription="@string/bouton_poubelle"
@@ -67,13 +67,13 @@
 
     <TextView
         android:id="@+id/item_list_letter_Room"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="@dimen/circle_color_size"
+        android:layout_height="@dimen/circle_color_size"
         android:layout_marginStart="@dimen/circle_color_size_letter_margin_start"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginTop="@dimen/circle_color_size_letter_margin_top"
+        android:layout_marginBottom="@dimen/circle_color_size_letter_margin_bottom"
         android:textColor="@color/colorFont"
-        android:textSize="30sp"
+        android:textSize="@dimen/circle_color_size_letter"
         android:textStyle="bold"
         android:gravity="center_horizontal"
         android:text="@string/letterRoom"

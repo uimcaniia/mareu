@@ -40,6 +40,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/margin_end_add_btn"
         android:layout_marginBottom="@dimen/margin_bottom_add_btn"
+        app:fabCustomSize="@dimen/floating_button_circle"
+        app:maxImageSize="@dimen/floating_button_img"
         tools:srcCompat="@drawable/ic_add_24px"
         app:srcCompat="@drawable/ic_add_24px" />
 

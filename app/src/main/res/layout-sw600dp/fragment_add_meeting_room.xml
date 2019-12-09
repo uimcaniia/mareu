@@ -29,7 +29,7 @@
                     android:gravity="center_horizontal"
                     android:background="@drawable/background_subject2"
                     android:padding="20dp"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/size_list_participant"
                     android:text="@string/th_me_de_la_r_union"
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
@@ -37,16 +37,16 @@
 
 
             <LinearLayout
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="36dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/imageCalendar"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:layout_marginStart="66dp"
+                    android:layout_marginStart="@dimen/padding_div_btn_validate"
                     android:tint="@color/colorPrimaryFade"
                     app:srcCompat="@drawable/ic_event_note_24px"
                     tools:srcCompat="@drawable/ic_event_note_24px" />
@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_texte_icone_date"
-
+                    android:layout_gravity="center_vertical"
                     android:textStyle="bold"
                     android:textSize="@dimen/size_title_fragment"
                     android:text="@string/date"/>
@@ -71,9 +71,9 @@
                 <ImageView
                     android:id="@+id/imageClock"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:layout_marginStart="66dp"
+                    android:layout_marginStart="@dimen/padding_div_btn_validate"
                     android:tint="@color/colorPrimaryFade"
                     app:srcCompat="@drawable/ic_access_time_24px"
                     tools:srcCompat="@drawable/ic_access_time_24px" />
@@ -81,6 +81,7 @@
                     android:id="@+id/hourMeeting"
                     android:inputType="number"
                     android:text="@string/horaire"
+                    android:layout_gravity="center_vertical"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,7 +98,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="66dp"
+                    android:layout_marginStart="@dimen/padding_div_btn_validate"
                     android:textStyle="bold"
                     android:textSize="@dimen/size_title_fragment"
                     android:text="@string/salle_disponible"/>
@@ -127,14 +128,14 @@
 
             <RelativeLayout
 
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/margin_bottom_fragment_room_title_participant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="66dp"
+                    android:layout_marginStart="@dimen/padding_div_btn_validate"
                     android:textStyle="bold"
                     android:textSize="@dimen/size_title_fragment"
                     android:text="@string/participants"/>
@@ -162,9 +163,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
-                android:layout_marginBottom="66dp"
-                android:paddingEnd="66dp"
-                android:paddingStart="66dp">
+                android:layout_marginBottom="0dp"
+                android:padding="@dimen/padding_div_btn_validate">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/valid_meeting"
@@ -176,6 +176,8 @@
                     android:focusable="true"
                     android:tint="@color/colorWhite"
                     app:backgroundTint="@color/colorAccent"
+                    app:fabCustomSize="@dimen/floating_button_circle"
+                    app:maxImageSize="@dimen/floating_button_img"
                     app:srcCompat="@drawable/ic_done_24px"
                     tools:srcCompat="@drawable/ic_done_24px" />
 
@@ -187,6 +189,8 @@
                     android:background="@drawable/ic_clear_24px"
                     android:backgroundTint="@color/colorAccent"
                     android:clickable="true"
+                    app:fabCustomSize="@dimen/floating_button_circle"
+                    app:maxImageSize="@dimen/floating_button_img"
                     android:focusable="true"
                     android:tint="@color/colorWhite"
                     app:srcCompat="@drawable/ic_clear_24px" />
@@ -199,7 +203,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="66dp"
             android:tint="@color/colorPrimaryFade"
         app:srcCompat="@drawable/ic_create_24px"/>

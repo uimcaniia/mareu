@@ -47,6 +47,7 @@
         android:layout_marginStart="@dimen/recycler_meeting_margin_start"
         android:textColor="@color/colorFont"
         android:layout_marginEnd="@dimen/recycler_meeting_margin_end"
+        android:textSize="@dimen/list_mail_list_meeting"
         app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
         app:layout_constraintBottom_toBottomOf="@+id/item_circle_color_meeting"
         app:layout_constraintStart_toEndOf="@+id/item_circle_color_meeting"

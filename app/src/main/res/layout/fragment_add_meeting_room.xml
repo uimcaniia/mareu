@@ -37,7 +37,7 @@
 
 
             <LinearLayout
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/margin_bottom_fragment_room_date_hour"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
@@ -126,7 +126,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/margin_bottom_fragment_room_title_participant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

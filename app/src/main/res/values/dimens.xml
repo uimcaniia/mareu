@@ -9,6 +9,7 @@
     <dimen name="recycler_meeting_margin_top_bootom">12dp</dimen>
     <dimen name="recycler_meeting_margin_start">12dp</dimen>
     <dimen name="recycler_meeting_margin_end">10dp</dimen>
+    <dimen name="list_mail_list_meeting">14sp</dimen>
 
     <dimen name="recycler_meeting_list_margin">16dp</dimen>
 
@@ -34,7 +35,7 @@
     <dimen name="margin_spinner">70dp</dimen>
     <dimen name="height_spinner">30dp</dimen>
 
-    <dimen name="size_title_fragment">18sp</dimen>
+    <dimen name="size_title_fragment">17sp</dimen>
     <dimen name="padding_top_list_participant">0dp</dimen>
     <dimen name="padding_participant">40dp</dimen>
     <dimen name="size_list_participant">16sp</dimen>
@@ -47,7 +48,10 @@
 
     <dimen name="margin_bottom_fragment_room">25dp</dimen>
     <dimen name="padding_div_btn_validate">20dp</dimen>
-
+    <dimen name="floating_button_circle">40dp</dimen>
+    <dimen name="floating_button_img">24dp</dimen>
+    <dimen name="margin_bottom_fragment_room_date_hour">5dp</dimen>
+    <dimen name="margin_bottom_fragment_room_title_participant">5dp</dimen>
 
 
 </resources>

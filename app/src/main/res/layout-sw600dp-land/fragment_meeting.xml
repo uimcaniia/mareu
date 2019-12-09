@@ -33,15 +33,17 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_new_metting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="114dp"
+        android:layout_height="80dp"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="112dp"
         android:layout_marginBottom="@dimen/margin_bottom_add_btn"
-        tools:srcCompat="@drawable/ic_add_24px"
-        app:srcCompat="@drawable/ic_add_24px" />
+        android:clickable="false"
+        app:fabCustomSize="@dimen/floating_button_circle"
+        app:maxImageSize="@dimen/floating_button_img"
+        app:srcCompat="@drawable/ic_add_24px"
+        tools:srcCompat="@drawable/ic_add_24px" />
 
 
 </RelativeLayout>
