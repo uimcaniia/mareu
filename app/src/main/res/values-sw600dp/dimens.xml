@@ -47,7 +47,7 @@
     <dimen name="margin_end_pen">20dp</dimen>
 
     <dimen name="margin_bottom_fragment_room">54dp</dimen>
-    <dimen name="padding_div_btn_validate">66dp</dimen>
+    <dimen name="padding_div_btn_validate">96dp</dimen>
     <dimen name="floating_button_circle">80dp</dimen>
     <dimen name="floating_button_img">42dp</dimen>
     <dimen name="margin_bottom_fragment_room_date_hour">45dp</dimen>

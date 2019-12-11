@@ -34,95 +34,124 @@
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
 
-
             <LinearLayout
-                android:layout_marginBottom="5dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/imageCalendar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_start_icone_date"
-                    android:tint="@color/colorPrimaryFade"
-                    app:srcCompat="@drawable/ic_event_note_24px"
-                    tools:srcCompat="@drawable/ic_event_note_24px" />
-                <TextView
-                    android:id="@+id/dateMeeting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_start_texte_icone_date"
 
-                    android:textStyle="bold"
-                    android:textSize="@dimen/size_title_fragment"
-                    android:text="@string/date"/>
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_marginBottom="@dimen/margin_bottom_fragment_room"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/imageClock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_start_icone_date"
-                    android:tint="@color/colorPrimaryFade"
-                    app:srcCompat="@drawable/ic_access_time_24px"
-                    tools:srcCompat="@drawable/ic_access_time_24px" />
-                <TextView
-                    android:id="@+id/hourMeeting"
-                    android:inputType="number"
-                    android:text="@string/horaire"
-                    android:textStyle="bold"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_start_texte_icone_date"
-                    android:textSize="@dimen/size_title_fragment" />
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageCalendar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/margin_start_icone_date"
+                            android:gravity="center_vertical"
+                            android:tint="@color/colorPrimaryFade"
+                            app:srcCompat="@drawable/ic_event_note_24px"
+                            tools:srcCompat="@drawable/ic_event_note_24px" />
+
+                        <TextView
+                            android:id="@+id/dateMeeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start_texte_icone_date"
+
+                            android:text="@string/date"
+                            android:textSize="@dimen/size_title_fragment"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_bottom_fragment_room"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageClock"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/margin_start_icone_date"
+                            android:gravity="center_vertical"
+                            android:tint="@color/colorPrimaryFade"
+                            app:srcCompat="@drawable/ic_access_time_24px"
+                            tools:srcCompat="@drawable/ic_access_time_24px" />
+
+                        <TextView
+                            android:id="@+id/hourMeeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start_texte_icone_date"
+                            android:inputType="number"
+                            android:text="@string/horaire"
+                            android:textSize="@dimen/size_title_fragment"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
 
 
+                <LinearLayout
 
-            <RelativeLayout
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_start_texte_icone_date"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/size_title_fragment"
-                    android:text="@string/salle_disponible"/>
-            </RelativeLayout>
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="78dp"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
-            <RelativeLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_marginBottom="@dimen/margin_bottom_spinner"
-                android:layout_marginStart="@dimen/margin_spinner"
-                android:layout_marginEnd="@dimen/margin_spinner"
-                android:textColor="@color/colorWhite"
-                android:background="@drawable/background_spinner">
+                            android:textStyle="bold"
+                            android:textSize="@dimen/size_title_fragment"
+                            android:text="@string/salle_disponible"/>
+                    </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinnerRoom"
-                    android:theme="@style/AppTheme.NoTitleBar"
-                    android:layout_width="300dp"
-                    android:layout_height="@dimen/height_spinner"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:spinnerMode="dropdown" />
+                    <RelativeLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_bottom_spinner"
+                        android:layout_marginStart="@dimen/margin_spinner_land"
+                        android:layout_marginEnd="@dimen/margin_spinner_land"
+                        android:textColor="@color/colorWhite"
+                        android:background="@drawable/background_spinner">
 
-            </RelativeLayout>
+                        <Spinner
+                            android:id="@+id/spinnerRoom"
+                            android:theme="@style/AppTheme.NoTitleBar"
+                            android:layout_width="300dp"
+                            android:layout_height="@dimen/height_spinner"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:spinnerMode="dropdown" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
 
             <RelativeLayout
 
